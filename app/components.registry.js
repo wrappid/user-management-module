@@ -1,17 +1,17 @@
+import Permissions from "./components/Permissions";
 import RolePermission from "./components/RolePermission";
 import RolePermissionForm from "./components/RolePermissionForm";
+import Roles from "./components/Roles";
+import RxUser from "./components/RxUser";
 import UserPermission from "./components/UserPermission";
 import UserPermissionForm from "./components/UserPermissionForm";
-import RxUser from "./components/RxUser";
-import Permissions from "./components/Permissions";
-import Roles from "./components/Roles";
 
 export const ComponentRegistry = {
-  RolePermission: { comp: RolePermission },
+  Permissions       : { comp: Permissions },
+  RolePermission    : { comp: RolePermission },
   RolePermissionForm: { comp: RolePermissionForm },
-  UserPermission: { comp: UserPermission },
-  UserPermissionForm: { comp: UserPermissionForm },
-  RxUser: { comp: RxUser },
-  Permissions: { comp:Permissions },
-  Roles: { comp:Roles }
+  Roles             : { comp: Roles },
+  RxUser            : { comp: RxUser },
+  UserPermission    : { comp: UserPermission },
+  UserPermissionForm: { comp: UserPermissionForm }
 };
