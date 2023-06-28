@@ -20,9 +20,6 @@ const testReducer = (state = initialState, action) => {
         success: true
       };
 
-    case TEST_FAILURE:
-      return initialState;
-
     default:
       return state;
   }

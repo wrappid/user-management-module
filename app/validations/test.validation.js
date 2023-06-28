@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export const checkEmailorPhone = {
   message: yup
     .string()
