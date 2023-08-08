@@ -1,4 +1,4 @@
-export const urls = {
+export const RouteRegistry = {
   MENU           : "menu",
   PERMISSION     : "permission",
   ROLE           : "role",
