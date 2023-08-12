@@ -1,8 +1,6 @@
 import { SanRolePermission, SanRolePermissionReadMap } from "./functions/sanity.functions";
 
-// asyncSelect and formSubmitSanitization
-
-export const FunctionRegistry = {
+export const FunctionsRegistry = {
   SanRolePermission       : SanRolePermission,
   SanRolePermissionReadMap: SanRolePermissionReadMap
 };

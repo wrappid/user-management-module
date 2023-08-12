@@ -6,7 +6,7 @@ import RxUser from "./components/RxUser";
 import UserPermission from "./components/UserPermission";
 import UserPermissionForm from "./components/UserPermissionForm";
 
-export const ComponentRegistry = {
+export const ComponentsRegistry = {
   Permissions       : { comp: Permissions },
   RolePermission    : { comp: RolePermission },
   RolePermissionForm: { comp: RolePermissionForm },
