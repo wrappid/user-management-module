@@ -1,3 +1,3 @@
 import * as yup from "yup";
 
-export const ValidationRegistry = { permissionFormSchema: { link: yup.string().nullable() } };
+export const ValidationsRegistry = { permissionFormSchema: { link: yup.string().nullable() } };
