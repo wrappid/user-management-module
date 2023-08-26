@@ -1,10 +1,10 @@
-const testdatas = require("./models/testdatas.model");
+const TestDatas = require("./models/TestDatas.model");
 
 const modelsRegistry = {
-  "testdatas": {
-    database: "application",
-    model   : testdatas
-  }
+    "TestDatas": {
+        database: "application",
+        model   : TestDatas
+    }
 };
 
 exports.modelsRegistry = modelsRegistry;
