@@ -1,11 +1,13 @@
 const testController = require("./controllers/test.controller");
-
+const usermanagementController = require("./controllers/usermanagement.controller");
+const { CoreMiddlewaresRegistry } = require("@wrappid/service-core");
+const {rolePermissionGET} = require("./validations/usermanagement.validation")
+// const CoreMiddleware =
 const controllersRegistry = {
-    "testGetAllFunc": testController.testGetAllFunc,
-    "testGetFunc": testController.testGetFunc,
-    "testPostFunc": testController.testPostFunc,
-    "testPutFunc": testController.testPutFunc,
-    "testPatchFunc": testController.testPatchFunc,
+  rolePermission: [
+    CoreMiddlewaresRegistry.validation(rolePermissionGET),
+    usermanagementController.rolePermission,
+  ],
 };
 
 exports.controllersRegistry = controllersRegistry;

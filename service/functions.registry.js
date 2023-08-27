@@ -1,11 +1,8 @@
 const testFunctions = require("./functions/test.functions");
+const usermanagementFunctions = require("./functions/usermanagement.functions");
 
 const functionsRegistry = {
-    "readTestData": testFunctions.readTestData,
-    "readTestDataAll": testFunctions.readTestDataAll,
-    "createTestData": testFunctions.createTestData,
-    "updateTestData": testFunctions.updateTestData,
-    "deleteTestData": testFunctions.deleteTestData,
+  getRolePermissions: usermanagementFunctions.getRolePermissions,
 };
 
 exports.functionsRegistry = functionsRegistry;
