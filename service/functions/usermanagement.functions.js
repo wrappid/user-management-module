@@ -1,4 +1,6 @@
-const { cacheActions, databaseActions } = require("@wrappid/service-core");
+const { cacheActions, databaseActions, databaseProvider, coreConstant } = require("@wrappid/service-core");
+
+
 async function groupRolePermissionData(data, roleId) {
     try {
       if (!data || data.length == 0) return null;
@@ -6,17 +8,17 @@ async function groupRolePermissionData(data, roleId) {
         var x = await databaseActions.findAll("application","Permissions",{
           include: [
             {
-              model: db.RolePermissions,
+              model: databaseProvider.application.models.RolePermissions,
               attributes: ["id", "priority"],
               required: true,
               where: {
                 roleId: roleId,
-                _status: entityStatus.ACTIVE,
+                _status: coreConstant.entityStatus.ACTIVE ,
               },
             },
           ],
-          where: { parentId: data[i].id, _status: entityStatus.ACTIVE },
-          order: [[db.RolePermissions, "priority", "asc"]],
+          where: { parentId: data[i].id, _status: coreConstant.entityStatus.ACTIVE  },
+          order: [[databaseProvider.application.models.RolePermissions, "priority", "asc"]],
         });
         data[i].dataValues["Children"] = await groupRolePermissionData(x, roleId);
       }
@@ -34,17 +36,17 @@ async function groupRolePermissionData(data, roleId) {
         var x = await databaseActions.findAll("application",".Permissions",{
           include: [
             {
-              model: db.UserPermissions,
+              model: databaseProvider.application.models.UserPermissions,
               attributes: ["id", "priority"],
               required: true,
               where: {
                 userId: userId,
-                _status: entityStatus.ACTIVE,
+                _status: coreConstant.entityStatus.ACTIVE ,
               },
             },
           ],
-          where: { parentId: data[i].id, _status: entityStatus.ACTIVE },
-          order: [[db.UserPermissions, "priority", "asc"]],
+          where: { parentId: data[i].id, _status: coreConstant.entityStatus.ACTIVE  },
+          order: [[databaseProvider.application.models.UserPermissions, "priority", "asc"]],
         });
         data[i].dataValues["Children"] = await groupUserPermissionData(x, userId);
       }
@@ -72,17 +74,17 @@ const getRolePermissions = async (req, res) => {
     var rolePermissions = await databaseActions.findAll("application","Permissions",{
       include: [
         {
-          model: db.RolePermissions,
+          model: databaseProvider.application.models.RolePermissions,
           attributes: ["id", "priority"],
           required: true,
           where: {
             roleId: roleId,
-            _status: entityStatus.ACTIVE,
+            _status: coreConstant.entityStatus.ACTIVE,
           },
         },
       ],
-      where: { parentId: null, _status: entityStatus.ACTIVE },
-      order: [[db.RolePermissions, "priority", "asc"]],
+      where: { parentId: null, _status: coreConstant.entityStatus.ACTIVE },
+      order: [[databaseProvider.application.models.RolePermissions, "priority", "asc"]],
     });
     //Group child role permissions
     rolePermissions = await groupRolePermissionData(rolePermissions, roleId);
@@ -91,17 +93,17 @@ const getRolePermissions = async (req, res) => {
     var userPermissions = await databaseActions.findAll("application","Permissions",{
       include: [
         {
-          model: db.UserPermissions,
+          model: databaseProvider.application.models.UserPermissions,
           attributes: ["id", "priority"],
           required: true,
           where: {
             userId: req.user.userId,
-            _status: entityStatus.ACTIVE,
+            _status: coreConstant.entityStatus.ACTIVE,
           },
         },
       ],
-      where: { parentId: null, _status: entityStatus.ACTIVE },
-      order: [[db.UserPermissions, "priority", "asc"]],
+      where: { parentId: null, _status: coreConstant.entityStatus.ACTIVE },
+      order: [[databaseProvider.application.models.UserPermissions, "priority", "asc"]],
     });
     //Group child user permissions
     userPermissions = await groupUserPermissionData(
