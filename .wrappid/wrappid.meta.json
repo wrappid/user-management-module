@@ -5,7 +5,7 @@
     "remote": true,
     "repoProvider": "github.com",
     "repoOwner": "wrappid",
-    "repoURL": "https://github.com/wrappid/wrappid-module.git",
+    "repoURL": "https://github.com/wrappid/user-management-module.git",
     "app": {
         "renderType": []
     },
