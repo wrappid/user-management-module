@@ -1,4 +1,3 @@
-const testFunctions = require("./functions/test.functions");
 const usermanagementFunctions = require("./functions/usermanagement.functions");
 
 const functionsRegistry = {
