@@ -2,9 +2,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 
-const testFunctions = require("../functions/test.functions");
-const usermanagementFunctions = require("../functions/usermanagement.functions")
-
+const usermanagementFunctions = require("../functions/usermanagement.functions");
 
 module.exports.rolePermission = async (req, res) => {
   try {
@@ -17,10 +15,13 @@ module.exports.rolePermission = async (req, res) => {
   }
 };
 
-module.exports.getUserSearchPaginated = async (req, res) =>{
+module.exports.getUserSearchPaginated = async (req, res) => {
   try {
     // res.status(200).json({message:"API call sucessfully!"});
-    let data = await usermanagementFunctions.getUserSearchPaginatedFunc(req, res);
+    let data = await usermanagementFunctions.getUserSearchPaginatedFunc(
+      req,
+      res
+    );
     console.log("Search user done");
     res.status(data.status).json(data);
   } catch (err) {
