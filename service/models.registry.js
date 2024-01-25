@@ -1,103 +1,54 @@
-const PersonAddresses = require("./models/PersonAddresses.model");
-const PersonContacts = require("./models/PersonContacts.model");
-const PersonDocs = require("./models/PersonDocs.model");
-const PersonEducations = require("./models/PersonEducations.model");
-const PersonExperiences = require("./models/PersonExperiences.model");
-const PersonRelations = require("./models/PersonRelations.model");
-const Persons = require("./models/Persons.model");
+const Coupons = require("./models/Coupons.model");
+const LoginLogs = require("./models/LoginLogs.model");
+const Permissions = require("./models/Permissions.model");
+const RolePermissions = require("./models/RolePermissions.model");
+const Roles = require("./models/Roles.model");
 const UserCoupons = require("./models/UserCoupons.model");
-const UserPayments = require("./models/UserPayments.model");
 const UserPermissions = require("./models/UserPermissions.model");
+const Users = require("./models/Users.model");
 const UserSettings = require("./models/UserSettings.model");
 const UserTokens = require("./models/UserTokens.model");
-const Users = require("./models/Users.model");
-const LoginLogs = require("./models/LoginLogs.model");
-const Coupons = require("./models/Coupons.model");
-const DoctorDetails = require("./models/DoctorDetails.model");
-const RolePermissions = require("./models/RolePermissions.model");
-const Permissions = require("./models/Permissions.model");
-const Roles = require("./models/Roles.model");
-const Relations = require("./models/Relations.model");
+
 const modelsRegistry = {
-  PersonAddresses: {
+  "Coupons":{
     database: "application",
-    model: PersonAddresses,
+    model: Coupons
   },
-  PersonContacts: {
+  "LoginLogs":{
     database: "application",
-    model: PersonContacts,
+    model: LoginLogs
   },
-  PersonDocs: {
+  "Permissions":{
     database: "application",
-    model: PersonDocs,
+    model: Permissions
   },
-  PersonEducations: {
+  "RolePermissions":{
     database: "application",
-    model: PersonEducations,
+    model: RolePermissions
   },
-  PersonExperiences: {
+  "Roles":{
     database: "application",
-    model: PersonExperiences,
+    model: Roles
   },
-  PersonRelations: {
+  "UserCoupons":{
     database: "application",
-    model: PersonRelations,
+    model: UserCoupons
   },
-  Persons: {
+  "UserPermissions":{
     database: "application",
-    model: Persons,
+    model: UserPermissions
   },
-  UserCoupons: {
+  "Users":{
     database: "application",
-    model: UserCoupons,
+    model: Users
   },
-  UserPayments: {
+  "UserSettings":{
     database: "application",
-    model: UserPayments,
+    model: UserSettings
   },
-  UserPermissions: {
+  "UserTokens":{
     database: "application",
-    model: UserPermissions,
-  },
-  UserSettings: {
-    database: "application",
-    model: UserSettings,
-  },
-  UserTokens: {
-    database: "application",
-    model: UserTokens,
-  },
-  Users: {
-    database: "application",
-    model: Users,
-  },
-  LoginLogs: {
-    database: "application",
-    model: LoginLogs,
-  },
-  Coupons: {
-    database: "application",
-    model: Coupons,
-  },
-  DoctorDetails: {
-    database: "application",
-    model: DoctorDetails,
-  },
-  RolePermissions: {
-    database: "application",
-    model: RolePermissions,
-  },
-  Permissions: {
-    database: "application",
-    model: Permissions,
-  },
-  Roles: {
-    database: "application",
-    model: Roles,
-  },
-  Relations: {
-    database: "application",
-    model: Relations,
+    model: UserTokens
   },
 };
 

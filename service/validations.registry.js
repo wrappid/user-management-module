@@ -1,6 +1,7 @@
-const usermanagementValidation = require("./validations/usermanagement.validation")
+const usermanagementValidation = require("./validations/usermanagement.validation");
+
 const validationsRegistry = {
-    ...usermanagementValidation
+  ...usermanagementValidation
 };
 
 exports.validationsRegistry = validationsRegistry;
