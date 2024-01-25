@@ -1,6 +1,6 @@
-const usermanagementController = require("./controllers/usermanagement.controller");
 const { CoreMiddlewaresRegistry } = require("@wrappid/service-core");
-const {rolePermissionGET,getUserSearchPaginated} = require("./validations/usermanagement.validation")
+const usermanagementController = require("./controllers/usermanagement.controller");
+const {rolePermissionGET} = require("./validations/usermanagement.validation");
 // const CoreMiddleware =
 const controllersRegistry = {
   rolePermission: [

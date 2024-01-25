@@ -41,11 +41,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   users.associate = (models) => {
-    users.hasOne(models.Persons, {
+    /* users.hasOne(models.Persons, {
       foreignKey: "userId",
       sourceKey: "id",
       as: "Person",
-    });
+    }); */
     users.belongsTo(models.Roles, {
       as: "Role",
       foreignKey: "roleId",
