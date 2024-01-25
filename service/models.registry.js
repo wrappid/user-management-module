@@ -8,6 +8,7 @@ const UserPermissions = require("./models/UserPermissions.model");
 const Users = require("./models/Users.model");
 const UserSettings = require("./models/UserSettings.model");
 const UserTokens = require("./models/UserTokens.model");
+
 const modelsRegistry = {
   "Coupons":{
     database: "application",
