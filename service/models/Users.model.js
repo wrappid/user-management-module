@@ -41,11 +41,11 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   users.associate = (models) => {
-    /* users.hasOne(models.Persons, {
+    users.hasOne(models.Persons, {
       foreignKey: "userId",
       sourceKey: "id",
       as: "Person",
-    }); */
+    }); 
     users.belongsTo(models.Roles, {
       as: "Role",
       foreignKey: "roleId",
@@ -86,8 +86,8 @@ module.exports = (sequelize, DataTypes) => {
     users.hasMany(models.UserTokens, {
       foreignKey: "userId",
       sourceKey: "id",
-    }); */
-    /* users.hasOne(models.Applications, {
+    }); 
+   users.hasOne(models.Applications, {
       foreignKey: "employeeId",
       sourceKey: "id",
     }); */
