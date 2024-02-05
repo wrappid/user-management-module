@@ -1,7 +1,4 @@
-#!/usr/bin/env node
-/* eslint-disable import/order */
-/* eslint-disable no-console */
-// eslint-disable-next-line no-undef
+// eslint-disable-next-line
 const path = require("path");
 
 // eslint-disable-next-line no-undef
