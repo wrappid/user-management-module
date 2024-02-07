@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export const Permissions = (sequelize: any, DataTypes: any) => {
   const permissions = sequelize.define("Permissions", {
     id: {
       type: DataTypes.INTEGER,
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  permissions.associate = (models) => {
+  permissions.associate = (models: any) => {
     permissions.hasMany(models.RolePermissions, {
       foreignKey: "permissionId",
       sourceKey: "id",

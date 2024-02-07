@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export const Coupons = (sequelize: any, DataTypes: any) => {
   const coupons = sequelize.define("Coupons", {
     id: {
       type: DataTypes.INTEGER,
@@ -24,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     rule: {
       type: DataTypes.JSONB,
       defaultValue: {
-        discountType: "flat" | "percentage",
+        discountType: "flat",
         upto: "150",
         minAmount: "100",
-        discountPercentage: "10%",
+        discountPercentage: "0%",
       },
     },
     validFrom: {
@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  coupons.associate = (models) => {
+  coupons.associate = (models: any) => {
     coupons.belongsTo(models.Users, {
       foreignKey: "userId",
       as: "User",
