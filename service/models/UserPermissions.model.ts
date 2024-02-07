@@ -1,5 +1,5 @@
-module.exports = (sequelize, DataTypes) => {
-  const rolePermissions = sequelize.define("RolePermissions", {
+export const UserPermissions = (sequelize: any, DataTypes: any) => {
+  const userPermissions = sequelize.define("UserPermissions", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    isVisible: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
     _status: {
       type: DataTypes.STRING,
     },
@@ -30,31 +26,32 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  rolePermissions.associate = (models) => {
-    rolePermissions.belongsTo(models.Roles, {
-      foreignKey: "roleId",
-      sourceKey: "id",
-    });
-    rolePermissions.belongsTo(models.Permissions, {
-      foreignKey: "permissionId",
-      sourceKey: "id",
-    });
-    rolePermissions.belongsTo(models.Users, {
+  userPermissions.associate = (models: any) => {
+    userPermissions.belongsTo(models.Users, {
       foreignKey: "createdBy",
       as: "Owner",
       sourceKey: "id",
     });
-    rolePermissions.belongsTo(models.Users, {
+    userPermissions.belongsTo(models.Users, {
       foreignKey: "updatedBy",
       as: "Updater",
       sourceKey: "id",
     });
-    rolePermissions.belongsTo(models.Users, {
+    userPermissions.belongsTo(models.Users, {
+      foreignKey: "userId",
+      as: "User",
+      sourceKey: "id",
+    });
+    userPermissions.belongsTo(models.Permissions, {
+      foreignKey: "permissionId",
+      sourceKey: "id",
+    });
+    userPermissions.belongsTo(models.Users, {
       foreignKey: "deletedBy",
       as: "Destroyer",
       sourceKey: "id",
     });
   };
 
-  return rolePermissions;
+  return userPermissions;
 };

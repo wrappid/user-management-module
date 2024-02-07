@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export const UserSettings = (sequelize: any, DataTypes: any) => {
   const userSettings = sequelize.define("UserSettings", {
     id: {
       type: DataTypes.INTEGER,
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  userSettings.associate = (models) => {
+  userSettings.associate = (models: any) => {
     userSettings.belongsTo(models.Users, {
       foreignKey: "userId",
       as: "User",

@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export const UserCoupons = (sequelize: any, DataTypes: any) => {
   const UserCoupons = sequelize.define("UserCoupons", {
     id: {
       type: DataTypes.INTEGER,
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  UserCoupons.associate = (models) => {
+  UserCoupons.associate = (models: any) => {
     UserCoupons.belongsTo(models.Coupons, {
       foreignKey: "couponId",
       sourceKey: "id",

@@ -1,25 +1,25 @@
-module.exports = (sequelize, DataTypes) => {
-  const userTokens = sequelize.define("UserTokens", {
+export const LoginLogs = (sequelize: any, DataTypes: any) => {
+  const loginLogs = sequelize.define("LoginLogs", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    amount: {
+    route: {
       type: DataTypes.STRING,
-      defaultValue: "",
+      defaultValue: null,
     },
-    paymentDate: {
-      type: "TIMESTAMP",
-      defaultValue: new Date(),
-    },
-    token: {
-      type: DataTypes.FLOAT,
-      defaultValue: 0,
+    message: {
+      type: DataTypes.STRING,
+      defaultValue: null,
     },
     status: {
       type: DataTypes.STRING,
-      defaultValue: "add",
+      defaultValue: null,
+    },
+    extraInfo: {
+      type: DataTypes.JSONB,
+      defaultValue: null,
     },
     isActive: {
       type: DataTypes.BOOLEAN,
@@ -34,28 +34,28 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  userTokens.associate = (models) => {
-    userTokens.belongsTo(models.Users, {
-      foreignKey: "userId",
-      as: "User",
-      sourceKey: "id",
-    });
-    userTokens.belongsTo(models.Users, {
+  loginLogs.associate = (models: any) => {
+    loginLogs.belongsTo(models.Users, {
       foreignKey: "createdBy",
       as: "Owner",
       sourceKey: "id",
     });
-    userTokens.belongsTo(models.Users, {
+    loginLogs.belongsTo(models.Users, {
       foreignKey: "updatedBy",
       as: "Updater",
       sourceKey: "id",
     });
-    userTokens.belongsTo(models.Users, {
+    loginLogs.belongsTo(models.Users, {
+      foreignKey: "userId",
+      as: "User",
+      sourceKey: "id",
+    });
+    loginLogs.belongsTo(models.Users, {
       foreignKey: "deletedBy",
       as: "Destroyer",
       sourceKey: "id",
     });
   };
 
-  return userTokens;
+  return loginLogs;
 };

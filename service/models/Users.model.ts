@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export const Users = (sequelize: any, DataTypes: any) => {
   const users = sequelize.define("Users", {
     id: {
       type: DataTypes.INTEGER,
@@ -40,12 +40,14 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  users.associate = (models) => {
+  users.associate = (models: any) => {
+    /*
     users.hasOne(models.Persons, {
       foreignKey: "userId",
       sourceKey: "id",
       as: "Person",
-    }); 
+    });
+    */
     users.belongsTo(models.Roles, {
       as: "Role",
       foreignKey: "roleId",
