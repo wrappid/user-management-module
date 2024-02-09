@@ -39,33 +39,40 @@ export const Permissions = (sequelize: any, DataTypes: any) => {
   });
 
   permissions.associate = (models: any) => {
-    permissions.hasMany(models.RolePermissions, {
-      foreignKey: "permissionId",
-      sourceKey: "id",
-    });
-    permissions.hasMany(models.UserPermissions, {
-      foreignKey: "permissionId",
-      sourceKey: "id",
-    });
-    permissions.belongsTo(models.Users, {
-      foreignKey: "createdBy",
-      as: "Owner",
-      sourceKey: "id",
-    });
-    permissions.belongsTo(models.Users, {
-      foreignKey: "updatedBy",
-      as: "Updater",
-      sourceKey: "id",
-    });
-    permissions.belongsTo(models.Permissions, {
-      foreignKey: "parentId",
-      sourceKey: "id",
-    });
-    permissions.belongsTo(models.Users, {
-      foreignKey: "deletedBy",
-      as: "Destroyer",
-      sourceKey: "id",
-    });
+    if (
+      models.RolePermissions &&
+      models.UserPermissions &&
+      models.Users &&
+      models.Permissions
+    ) {
+      permissions.hasMany(models.RolePermissions, {
+        foreignKey: "permissionId",
+        sourceKey: "id",
+      });
+      permissions.hasMany(models.UserPermissions, {
+        foreignKey: "permissionId",
+        sourceKey: "id",
+      });
+      permissions.belongsTo(models.Users, {
+        foreignKey: "createdBy",
+        as: "Owner",
+        sourceKey: "id",
+      });
+      permissions.belongsTo(models.Users, {
+        foreignKey: "updatedBy",
+        as: "Updater",
+        sourceKey: "id",
+      });
+      permissions.belongsTo(models.Permissions, {
+        foreignKey: "parentId",
+        sourceKey: "id",
+      });
+      permissions.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
   };
 
   return permissions;

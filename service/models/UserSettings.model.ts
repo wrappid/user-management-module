@@ -27,26 +27,28 @@ export const UserSettings = (sequelize: any, DataTypes: any) => {
   });
 
   userSettings.associate = (models: any) => {
-    userSettings.belongsTo(models.Users, {
-      foreignKey: "userId",
-      as: "User",
-      sourceKey: "id",
-    });
-    userSettings.belongsTo(models.Users, {
-      foreignKey: "createdBy",
-      as: "Owner",
-      sourceKey: "id",
-    });
-    userSettings.belongsTo(models.Users, {
-      foreignKey: "updatedBy",
-      as: "Updater",
-      sourceKey: "id",
-    });
-    userSettings.belongsTo(models.Users, {
-      foreignKey: "deletedBy",
-      as: "Destroyer",
-      sourceKey: "id",
-    });
+    if (models.Users) {
+      userSettings.belongsTo(models.Users, {
+        foreignKey: "userId",
+        as: "User",
+        sourceKey: "id",
+      });
+      userSettings.belongsTo(models.Users, {
+        foreignKey: "createdBy",
+        as: "Owner",
+        sourceKey: "id",
+      });
+      userSettings.belongsTo(models.Users, {
+        foreignKey: "updatedBy",
+        as: "Updater",
+        sourceKey: "id",
+      });
+      userSettings.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
   };
 
   return userSettings;

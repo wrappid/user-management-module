@@ -41,18 +41,19 @@ export const Users = (sequelize: any, DataTypes: any) => {
   });
 
   users.associate = (models: any) => {
-    /*
+    if (models.Roles && models.Users)
+      /*
     users.hasOne(models.Persons, {
       foreignKey: "userId",
       sourceKey: "id",
       as: "Person",
     });
     */
-    users.belongsTo(models.Roles, {
-      as: "Role",
-      foreignKey: "roleId",
-      sourceKey: "id",
-    });
+      users.belongsTo(models.Roles, {
+        as: "Role",
+        foreignKey: "roleId",
+        sourceKey: "id",
+      });
     /* users.hasMany(models.UserPermissions, {
       foreignKey: "userId",
       sourceKey: "id",

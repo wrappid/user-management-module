@@ -52,26 +52,28 @@ export const Coupons = (sequelize: any, DataTypes: any) => {
   });
 
   coupons.associate = (models: any) => {
-    coupons.belongsTo(models.Users, {
-      foreignKey: "userId",
-      as: "User",
-      sourceKey: "id",
-    });
-    coupons.belongsTo(models.Users, {
-      foreignKey: "createdBy",
-      as: "Owner",
-      sourceKey: "id",
-    });
-    coupons.belongsTo(models.Users, {
-      foreignKey: "updatedBy",
-      as: "Updater",
-      sourceKey: "id",
-    });
-    coupons.belongsTo(models.Users, {
-      foreignKey: "deletedBy",
-      as: "Destroyer",
-      sourceKey: "id",
-    });
+    if (models.Users) {
+      coupons.belongsTo(models.Users, {
+        foreignKey: "userId",
+        as: "User",
+        sourceKey: "id",
+      });
+      coupons.belongsTo(models.Users, {
+        foreignKey: "createdBy",
+        as: "Owner",
+        sourceKey: "id",
+      });
+      coupons.belongsTo(models.Users, {
+        foreignKey: "updatedBy",
+        as: "Updater",
+        sourceKey: "id",
+      });
+      coupons.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
   };
 
   return coupons;

@@ -8,7 +8,10 @@ import { UserPermissions } from "./models/UserPermissions.model";
 import { Users } from "./models/Users.model";
 import { UserSettings } from "./models/UserSettings.model";
 import { UserTokens } from "./models/UserTokens.model";
-
+import { PersonContacts } from "./models/PersonContacts.model";
+import { PersonRelations } from "./models/PersonRelations.model";
+import { Persons } from "./models/Persons.model";
+import { Relations } from "./models/Relations.model";
 const ModelsRegistry = {
   Coupons: {
     database: "application",
@@ -49,6 +52,22 @@ const ModelsRegistry = {
   UserTokens: {
     database: "application",
     model: UserTokens,
+  },
+  PersonContacts: {
+    database: "application",
+    model: PersonContacts,
+  },
+  PersonRelations: {
+    database: "application",
+    model: PersonRelations,
+  },
+  Persons: {
+    database: "application",
+    model: Persons,
+  },
+  Relations: {
+    database: "application",
+    model: Relations,
   },
 };
 

@@ -31,29 +31,31 @@ export const RolePermissions = (sequelize: any, DataTypes: any) => {
   });
 
   rolePermissions.associate = (models: any) => {
-    rolePermissions.belongsTo(models.Roles, {
-      foreignKey: "roleId",
-      sourceKey: "id",
-    });
-    rolePermissions.belongsTo(models.Permissions, {
-      foreignKey: "permissionId",
-      sourceKey: "id",
-    });
-    rolePermissions.belongsTo(models.Users, {
-      foreignKey: "createdBy",
-      as: "Owner",
-      sourceKey: "id",
-    });
-    rolePermissions.belongsTo(models.Users, {
-      foreignKey: "updatedBy",
-      as: "Updater",
-      sourceKey: "id",
-    });
-    rolePermissions.belongsTo(models.Users, {
-      foreignKey: "deletedBy",
-      as: "Destroyer",
-      sourceKey: "id",
-    });
+    if (models.Roles && models.Permissions && models.Users) {
+      rolePermissions.belongsTo(models.Roles, {
+        foreignKey: "roleId",
+        sourceKey: "id",
+      });
+      rolePermissions.belongsTo(models.Permissions, {
+        foreignKey: "permissionId",
+        sourceKey: "id",
+      });
+      rolePermissions.belongsTo(models.Users, {
+        foreignKey: "createdBy",
+        as: "Owner",
+        sourceKey: "id",
+      });
+      rolePermissions.belongsTo(models.Users, {
+        foreignKey: "updatedBy",
+        as: "Updater",
+        sourceKey: "id",
+      });
+      rolePermissions.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
   };
 
   return rolePermissions;
