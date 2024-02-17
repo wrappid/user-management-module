@@ -1,8 +1,8 @@
-import * as usermanagementValidation from "./validations/usermanagement.validation";
+import {rolePermissionGET, getUserSearchPaginated} from "./validations/usermanagement.validation";
 
 const ValidationsRegistry = {
-  rolePermissionGET: usermanagementValidation.rolePermissionGET,
-  getUserSearchPaginated: usermanagementValidation.getUserSearchPaginated,
+  rolePermissionGET: rolePermissionGET,
+  getUserSearchPaginated: getUserSearchPaginated,
 };
 
 export default ValidationsRegistry;
