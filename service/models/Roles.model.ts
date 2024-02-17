@@ -27,29 +27,33 @@ export const Roles = (sequelize: any, DataTypes: any) => {
   });
 
   roles.associate = (models: any) => {
-    roles.hasMany(models.Users, {
-      foreignKey: "roleId",
-      sourceKey: "id",
-    });
-    roles.hasMany(models.RolePermissions, {
-      foreignKey: "roleId",
-      sourceKey: "id",
-    });
-    roles.belongsTo(models.Users, {
-      foreignKey: "createdBy",
-      as: "Owner",
-      sourceKey: "id",
-    });
-    roles.belongsTo(models.Users, {
-      foreignKey: "updatedBy",
-      as: "Updater",
-      sourceKey: "id",
-    });
-    roles.belongsTo(models.Users, {
-      foreignKey: "deletedBy",
-      as: "Destroyer",
-      sourceKey: "id",
-    });
+    if ( models.RolePermissions) {
+      roles.hasMany(models.RolePermissions, {
+        foreignKey: "roleId",
+        sourceKey: "id",
+      });
+    }
+    if( models.Users ){
+      roles.hasMany(models.Users, {
+        foreignKey: "roleId",
+        sourceKey: "id",
+      });
+      roles.belongsTo(models.Users, {
+        foreignKey: "createdBy",
+        as: "Owner",
+        sourceKey: "id",
+      });
+      roles.belongsTo(models.Users, {
+        foreignKey: "updatedBy",
+        as: "Updater",
+        sourceKey: "id",
+      });
+      roles.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
   };
 
   return roles;

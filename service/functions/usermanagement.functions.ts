@@ -8,7 +8,7 @@ async function groupRolePermissionData(data: any, roleId: any) {
   try {
     if (!data || data.length == 0) return null;
     for (let i = 0; i < data.length; i++) {
-      let x = await databaseActions.findAll("application", "Permissions", {
+      const x = await databaseActions.findAll("application", "Permissions", {
         include: [
           {
             model: databaseProvider.application.models.RolePermissions,
@@ -45,7 +45,7 @@ async function groupUserPermissionData(data: any, userId: any) {
   try {
     if (!data || data.length == 0) return null;
     for (let i = 0; i < data.length; i++) {
-      let x = await databaseActions.findAll("application", ".Permissions", {
+      const x = await databaseActions.findAll("application", ".Permissions", {
         include: [
           {
             model: databaseProvider.application.models.UserPermissions,
@@ -85,7 +85,7 @@ const getRolePermissions = async (req: any, res: any) => {
   if (req.query.roleId) {
     roleId = req.query.roleId;
   } else {
-    let p = await databaseActions.findOne("application", "Persons", {
+    const p = await databaseActions.findOne("application", "Persons", {
       where: { userId: req.user.userId },
     });
     if (p?.isVerified) {
@@ -93,7 +93,7 @@ const getRolePermissions = async (req: any, res: any) => {
     }
   }
   if (roleId) {
-    let role = await databaseActions.findByPk("application", "Roles", roleId);
+    const role = await databaseActions.findByPk("application", "Roles", roleId);
     //Get role permissions
     let rolePermissions = await databaseActions.findAll(
       "application",
@@ -164,11 +164,11 @@ const getRolePermissions = async (req: any, res: any) => {
     });
     userPermissions = userPermissions
       ? userPermissions.map((a: any) => {
-          return {
-            ...a.dataValues,
-            priority: a.dataValues.UserPermissions[0].priority,
-          };
-        })
+        return {
+          ...a.dataValues,
+          priority: a.dataValues.UserPermissions[0].priority,
+        };
+      })
       : [];
 
     //concat and sort based on priority
@@ -191,11 +191,11 @@ const getRolePermissions = async (req: any, res: any) => {
 };
 // eslint-disable-next-line no-unused-vars
 const getUserSearchPaginatedFunc = async (req: any, res: any) => {
-  let name = "%" + req.query.input + "%";
-  let roleOb: any = {};
+  const name = "%" + req.query.input + "%";
+  const roleOb: any = {};
   if (req.query.role) roleOb.role = req.query.role;
   console.log("NAME", name);
-  let baseQuery = {
+  const baseQuery = {
     [databaseProvider.application.Sequelize.Op.or]: [
       {
         email: {
@@ -209,11 +209,11 @@ const getUserSearchPaginatedFunc = async (req: any, res: any) => {
       },
     ],
   };
-  let pageQuery: any = {};
+  const pageQuery: any = {};
   pageQuery["start"] = req.query.start;
   pageQuery["length"] = req.query.length;
 
-  let data = await paginate(
+  const data = await paginate(
     databaseProvider.application.models.Users,
     [
       {
@@ -244,12 +244,12 @@ const getUserSearchPaginatedFunc = async (req: any, res: any) => {
     pageQuery
   );
   console.log("Users match fetched successfully", data.totalRecords);
-  let finalRows: any = [];
+  const finalRows: any = [];
   for (let i = 0; i < data.rows.length; i++) {
-    let x: any = data.rows[i];
+    const x: any = data.rows[i];
     // eslint-disable-next-line no-unsafe-optional-chaining
-    let relatives: any = [...x?.Person?.Person];
-    let r = delete x?.Person?.Person;
+    const relatives: any = [...x?.Person?.Person];
+    const r = delete x?.Person?.Person;
     console.log("DELETING", r, ", relatives:", relatives?.length);
     finalRows.push(x);
     relatives?.forEach((relative: any) => {
@@ -284,7 +284,7 @@ async function paginate(
 ) {
   console.log("pageQuery", inculdeOb, whereOb, pageQuery);
   try {
-    let data = await databaseActions.findAll("application", "Users", {
+    const data = await databaseActions.findAll("application", "Users", {
       // benchmark: true,
       // logging: console.log,
       include: inculdeOb,
@@ -300,7 +300,7 @@ async function paginate(
       order: [[pageQuery?.orderBy || "id", pageQuery?.order || "desc"]],
     });
 
-    let totalRecords = await databaseProvider.application.models.Users.count({
+    const totalRecords = await databaseProvider.application.models.Users.count({
       include: inculdeOb,
       where: whereOb,
       distinct: true,

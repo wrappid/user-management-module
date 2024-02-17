@@ -6,7 +6,7 @@ import * as usermanagementFunctions from "../functions/usermanagement.functions"
 
 const rolePermission = async (req: any, res: any) => {
   try {
-    let data = await usermanagementFunctions.getRolePermissions(req, res);
+    const data = await usermanagementFunctions.getRolePermissions(req, res);
     console.log("Role permissions fethed ");
     res.status(data.status).json(data);
   } catch (err: any) {
@@ -18,7 +18,7 @@ const rolePermission = async (req: any, res: any) => {
 const getUserSearchPaginated = async (req: any, res: any) => {
   try {
     // res.status(200).json({message:"API call sucessfully!"});
-    let data = await usermanagementFunctions.getUserSearchPaginatedFunc(
+    const data = await usermanagementFunctions.getUserSearchPaginatedFunc(
       req,
       res
     );
