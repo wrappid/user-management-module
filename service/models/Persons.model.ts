@@ -108,14 +108,14 @@ export const Persons = (sequelize: any, DataTypes: any) => {
         sourceKey: "id",
       });
     }
-      /*
+    /*
     person.belongsTo(models.Departments, {
       foreignKey: "departmentId",
       sourceKey: "id",
     });
     */
     if(models.PersonRelations){
-    person.hasMany(models.PersonRelations, {
+      person.hasMany(models.PersonRelations, {
         as: "Person",
         foreignKey: "personId",
         sourceKey: "id",
@@ -132,7 +132,7 @@ export const Persons = (sequelize: any, DataTypes: any) => {
         sourceKey: "id",
       });
     }
-      /*
+    /*
     person.hasOne(models.DoctorDetails, {
       foreignKey: "doctorId",
       sourceKey: "id",
@@ -141,9 +141,9 @@ export const Persons = (sequelize: any, DataTypes: any) => {
     if(models.PersonAddresses)  {
 
       person.hasMany(models.PersonAddresses, {
-          foreignKey: "personId",
-          sourceKey: "id",
-        });
+        foreignKey: "personId",
+        sourceKey: "id",
+      });
     }
     if(models.PersonEducations)  {
       person.hasMany(models.PersonEducations, {
@@ -167,7 +167,7 @@ export const Persons = (sequelize: any, DataTypes: any) => {
 
       
       
-      /*
+    /*
     person.hasMany(models.Appointments, {
       as: "DoctorAppointments",
       foreignKey: "doctorId",

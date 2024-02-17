@@ -49,13 +49,13 @@ export const Users = (sequelize: any, DataTypes: any) => {
       });
     }
     if(models.Roles){
-        users.belongsTo(models.Roles, {
-          as: "Role",
-          foreignKey: "roleId",
-          sourceKey: "id",
-        });
+      users.belongsTo(models.Roles, {
+        as: "Role",
+        foreignKey: "roleId",
+        sourceKey: "id",
+      });
     }
-      if(models.UserPermissions){
+    if(models.UserPermissions){
       users.hasMany(models.UserPermissions, {
         foreignKey: "userId",
         sourceKey: "id",
@@ -110,7 +110,7 @@ export const Users = (sequelize: any, DataTypes: any) => {
       }); 
     }
     if(models.Applications){
-    users.hasOne(models.Applications, {
+      users.hasOne(models.Applications, {
         foreignKey: "employeeId",
         sourceKey: "id",
       }); 
