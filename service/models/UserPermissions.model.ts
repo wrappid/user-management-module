@@ -27,7 +27,7 @@ export const UserPermissions = (sequelize: any, DataTypes: any) => {
   });
 
   userPermissions.associate = (models: any) => {
-    if (models.Users && models.Permissions) {
+    if (models.Users) {
       userPermissions.belongsTo(models.Users, {
         foreignKey: "createdBy",
         as: "Owner",
@@ -43,13 +43,15 @@ export const UserPermissions = (sequelize: any, DataTypes: any) => {
         as: "User",
         sourceKey: "id",
       });
-      userPermissions.belongsTo(models.Permissions, {
-        foreignKey: "permissionId",
-        sourceKey: "id",
-      });
       userPermissions.belongsTo(models.Users, {
         foreignKey: "deletedBy",
         as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
+    if(models.Permissions){
+      userPermissions.belongsTo(models.Permissions, {
+        foreignKey: "permissionId",
         sourceKey: "id",
       });
     }

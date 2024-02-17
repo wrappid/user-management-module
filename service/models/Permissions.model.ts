@@ -39,18 +39,22 @@ export const Permissions = (sequelize: any, DataTypes: any) => {
   });
 
   permissions.associate = (models: any) => {
-    if (
-      models.RolePermissions &&
-      models.UserPermissions &&
-      models.Users &&
-      models.Permissions
-    ) {
+    if ( models.RolePermissions ) {
       permissions.hasMany(models.RolePermissions, {
         foreignKey: "permissionId",
         sourceKey: "id",
       });
+    }
+    if( models.UserPermissions){
       permissions.hasMany(models.UserPermissions, {
         foreignKey: "permissionId",
+        sourceKey: "id",
+      });
+    }
+    if( models.Users){
+      permissions.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
         sourceKey: "id",
       });
       permissions.belongsTo(models.Users, {
@@ -63,13 +67,10 @@ export const Permissions = (sequelize: any, DataTypes: any) => {
         as: "Updater",
         sourceKey: "id",
       });
+    }
+    if(models.Permissions){
       permissions.belongsTo(models.Permissions, {
         foreignKey: "parentId",
-        sourceKey: "id",
-      });
-      permissions.belongsTo(models.Users, {
-        foreignKey: "deletedBy",
-        as: "Destroyer",
         sourceKey: "id",
       });
     }

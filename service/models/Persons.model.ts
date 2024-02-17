@@ -85,15 +85,7 @@ export const Persons = (sequelize: any, DataTypes: any) => {
   });
 
   person.associate = (models: any) => {
-    if (
-      models.Users &&
-      models.PersonRelations &&
-      models.PersonContacts &&
-      models.PersonAddresses &&
-      models.PersonEducations &&
-      models.PersonExperiences &&
-      models.PersonDocs
-    ) {
+    if (models.Users) {
       person.belongsTo(models.Users, {
         as: "User",
         foreignKey: "userId",
@@ -104,23 +96,27 @@ export const Persons = (sequelize: any, DataTypes: any) => {
         foreignKey: "createdBy",
         sourceKey: "id",
       });
+    
       person.belongsTo(models.Users, {
         as: "Updater",
         foreignKey: "updatedBy",
         sourceKey: "id",
       });
+      person.belongsTo(models.Users, {
+        as: "Destroyer",
+        foreignKey: "deletedBy",
+        sourceKey: "id",
+      });
+    }
       /*
     person.belongsTo(models.Departments, {
       foreignKey: "departmentId",
       sourceKey: "id",
     });
     */
-      person.hasMany(models.PersonRelations, {
+    if(models.PersonRelations){
+    person.hasMany(models.PersonRelations, {
         as: "Person",
-        foreignKey: "personId",
-        sourceKey: "id",
-      });
-      person.hasMany(models.PersonContacts, {
         foreignKey: "personId",
         sourceKey: "id",
       });
@@ -129,28 +125,48 @@ export const Persons = (sequelize: any, DataTypes: any) => {
         foreignKey: "relatedPersonId",
         sourceKey: "id",
       });
+    }
+    if(models.PersonContacts){
+      person.hasMany(models.PersonContacts, {
+        foreignKey: "personId",
+        sourceKey: "id",
+      });
+    }
       /*
     person.hasOne(models.DoctorDetails, {
       foreignKey: "doctorId",
       sourceKey: "id",
     });
     */
+    if(models.PersonAddresses)  {
+
       person.hasMany(models.PersonAddresses, {
-        foreignKey: "personId",
-        sourceKey: "id",
-      });
+          foreignKey: "personId",
+          sourceKey: "id",
+        });
+    }
+    if(models.PersonEducations)  {
       person.hasMany(models.PersonEducations, {
         foreignKey: "personId",
         sourceKey: "id",
       });
+    }
+    if(models.PersonExperiences)  {
+
       person.hasMany(models.PersonExperiences, {
         foreignKey: "personId",
         sourceKey: "id",
       });
+    }
+    if(models.PersonDocs)  {
       person.hasMany(models.PersonDocs, {
         foreignKey: "personId",
         sourceKey: "id",
       });
+    }
+
+      
+      
       /*
     person.hasMany(models.Appointments, {
       as: "DoctorAppointments",
@@ -163,12 +179,8 @@ export const Persons = (sequelize: any, DataTypes: any) => {
       sourceKey: "id",
     });
     */
-      person.belongsTo(models.Users, {
-        as: "Destroyer",
-        foreignKey: "deletedBy",
-        sourceKey: "id",
-      });
-    }
+     
+    
   };
 
   return person;

@@ -27,12 +27,14 @@ export const Roles = (sequelize: any, DataTypes: any) => {
   });
 
   roles.associate = (models: any) => {
-    if (models.Users && models.RolePermissions) {
-      roles.hasMany(models.Users, {
+    if ( models.RolePermissions) {
+      roles.hasMany(models.RolePermissions, {
         foreignKey: "roleId",
         sourceKey: "id",
       });
-      roles.hasMany(models.RolePermissions, {
+    }
+    if( models.Users ){
+      roles.hasMany(models.Users, {
         foreignKey: "roleId",
         sourceKey: "id",
       });

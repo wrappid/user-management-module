@@ -21,7 +21,7 @@ export const PersonRelations = (sequelize: any, DataTypes: any) => {
   });
 
   personRelations.associate = (models: any) => {
-    if(models.Persons && models.Relations && models.Users ){
+    if(models.Persons ){
       personRelations.belongsTo(models.Persons, {
         as: "Person",
         foreignKey: "personId",
@@ -32,10 +32,14 @@ export const PersonRelations = (sequelize: any, DataTypes: any) => {
         foreignKey: "relatedPersonId",
         sourceKey: "id",
       });
+    }
+    if(models.Relations  ){
       personRelations.belongsTo(models.Relations, {
         foreignKey: "relationId",
         sourceKey: "id",
       });
+    }
+    if(models.Users){
       personRelations.belongsTo(models.Users, {
         as: "Owner",
         foreignKey: "createdBy",

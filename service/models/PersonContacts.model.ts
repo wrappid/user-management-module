@@ -37,11 +37,7 @@ export const PersonContacts = (sequelize: any, DataTypes: any) => {
   });
 
   personContacts.associate = (models: any) => {
-    if (models.Persons && models.Users) {
-      personContacts.belongsTo(models.Persons, {
-        foreignKey: "personId",
-        sourceKey: "id",
-      });
+    if (models.Users) {
       personContacts.belongsTo(models.Users, {
         as: "Owner",
         foreignKey: "createdBy",
@@ -55,6 +51,12 @@ export const PersonContacts = (sequelize: any, DataTypes: any) => {
       personContacts.belongsTo(models.Users, {
         as: "Destroyer",
         foreignKey: "deletedBy",
+        sourceKey: "id",
+      });
+    }
+    if(models.Persons){
+      personContacts.belongsTo(models.Persons, {
+        foreignKey: "personId",
         sourceKey: "id",
       });
     }

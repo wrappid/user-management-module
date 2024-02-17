@@ -31,15 +31,19 @@ export const RolePermissions = (sequelize: any, DataTypes: any) => {
   });
 
   rolePermissions.associate = (models: any) => {
-    if (models.Roles && models.Permissions && models.Users) {
+    if (models.Roles ) {
       rolePermissions.belongsTo(models.Roles, {
         foreignKey: "roleId",
         sourceKey: "id",
       });
+    }
+      if(models.Permissions){
       rolePermissions.belongsTo(models.Permissions, {
         foreignKey: "permissionId",
         sourceKey: "id",
       });
+    }
+      if(models.users){
       rolePermissions.belongsTo(models.Users, {
         foreignKey: "createdBy",
         as: "Owner",

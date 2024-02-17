@@ -35,6 +35,7 @@ export const LoginLogs = (sequelize: any, DataTypes: any) => {
   });
 
   loginLogs.associate = (models: any) => {
+    if(models.users){
     loginLogs.belongsTo(models.Users, {
       foreignKey: "createdBy",
       as: "Owner",
@@ -55,6 +56,7 @@ export const LoginLogs = (sequelize: any, DataTypes: any) => {
       as: "Destroyer",
       sourceKey: "id",
     });
+  }
   };
 
   return loginLogs;
