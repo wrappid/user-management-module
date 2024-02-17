@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
 interface RolePermissionGET {
-  body: yup.ObjectSchema<{}>;
+  body: yup.ObjectSchema<object>;
   query: yup.ObjectSchema<{
     roleId: any;
   }>;
@@ -16,8 +16,8 @@ export const rolePermissionGET: RolePermissionGET = {
 };
 
 interface GetUserSearchPaginated {
-  body: yup.ObjectSchema<{}>;
-  query: yup.ObjectSchema<{}>;
+  body: yup.ObjectSchema<object>;
+  query: yup.ObjectSchema<object>;
 }
 
 export const getUserSearchPaginated: GetUserSearchPaginated = {
