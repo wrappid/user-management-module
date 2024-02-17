@@ -1,11 +1,14 @@
-const { databaseActions, databaseProvider, coreConstant } = require("@wrappid/service-core");
+import {
+  databaseActions,
+  databaseProvider,
+  coreConstant,
+} from "@wrappid/service-core";
 
-
-async function groupRolePermissionData(data, roleId) {
+async function groupRolePermissionData(data: any, roleId: any) {
   try {
     if (!data || data.length == 0) return null;
     for (let i = 0; i < data.length; i++) {
-      let x = await databaseActions.findAll("application","Permissions",{
+      const x = await databaseActions.findAll("application", "Permissions", {
         include: [
           {
             model: databaseProvider.application.models.RolePermissions,
@@ -13,27 +16,36 @@ async function groupRolePermissionData(data, roleId) {
             required: true,
             where: {
               roleId: roleId,
-              _status: coreConstant.entityStatus.ACTIVE ,
+              _status: coreConstant.entityStatus.ACTIVE,
             },
           },
         ],
-        where: { parentId: data[i].id, _status: coreConstant.entityStatus.ACTIVE  },
-        order: [[databaseProvider.application.models.RolePermissions, "priority", "asc"]],
+        where: {
+          parentId: data[i].id,
+          _status: coreConstant.entityStatus.ACTIVE,
+        },
+        order: [
+          [
+            databaseProvider.application.models.RolePermissions,
+            "priority",
+            "asc",
+          ],
+        ],
       });
       data[i].dataValues["Children"] = await groupRolePermissionData(x, roleId);
     }
     return data;
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
     throw err;
   }
 }
 
-async function groupUserPermissionData(data, userId) {
+async function groupUserPermissionData(data: any, userId: any) {
   try {
     if (!data || data.length == 0) return null;
     for (let i = 0; i < data.length; i++) {
-      let x = await databaseActions.findAll("application",".Permissions",{
+      const x = await databaseActions.findAll("application", ".Permissions", {
         include: [
           {
             model: databaseProvider.application.models.UserPermissions,
@@ -41,71 +53,102 @@ async function groupUserPermissionData(data, userId) {
             required: true,
             where: {
               userId: userId,
-              _status: coreConstant.entityStatus.ACTIVE ,
+              _status: coreConstant.entityStatus.ACTIVE,
             },
           },
         ],
-        where: { parentId: data[i].id, _status: coreConstant.entityStatus.ACTIVE  },
-        order: [[databaseProvider.application.models.UserPermissions, "priority", "asc"]],
+        where: {
+          parentId: data[i].id,
+          _status: coreConstant.entityStatus.ACTIVE,
+        },
+        order: [
+          [
+            databaseProvider.application.models.UserPermissions,
+            "priority",
+            "asc",
+          ],
+        ],
       });
       data[i].dataValues["Children"] = await groupUserPermissionData(x, userId);
     }
     return data;
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
     throw err;
   }
 }
 
 // eslint-disable-next-line no-unused-vars
-const getRolePermissions = async (req, res) => {
+const getRolePermissions = async (req: any, res: any) => {
   // let isValidJOI = await authenticateJOI(req, "rolePermissionGET", ["query"]);
   let roleId = null;
   if (req.query.roleId) {
     roleId = req.query.roleId;
   } else {
-    let p = await databaseActions.findOne("application","Persons", { where: { userId: req.user.userId } });
+    const p = await databaseActions.findOne("application", "Persons", {
+      where: { userId: req.user.userId },
+    });
     if (p?.isVerified) {
       roleId = req.user.roleId;
     }
   }
   if (roleId) {
-    let role = await databaseActions.findByPk("application","Roles",roleId);
+    const role = await databaseActions.findByPk("application", "Roles", roleId);
     //Get role permissions
-    let rolePermissions = await databaseActions.findAll("application","Permissions",{
-      include: [
-        {
-          model: databaseProvider.application.models.RolePermissions,
-          attributes: ["id", "priority"],
-          required: true,
-          where: {
-            roleId: roleId,
-            _status: coreConstant.entityStatus.ACTIVE,
+    let rolePermissions = await databaseActions.findAll(
+      "application",
+      "Permissions",
+      {
+        include: [
+          {
+            model: databaseProvider.application.models.RolePermissions,
+            attributes: ["id", "priority"],
+            required: true,
+            where: {
+              roleId: roleId,
+              _status: coreConstant.entityStatus.ACTIVE,
+            },
           },
-        },
-      ],
-      where: { parentId: null, _status: coreConstant.entityStatus.ACTIVE },
-      order: [[databaseProvider.application.models.RolePermissions, "priority", "asc"]],
-    });
+        ],
+        where: { parentId: null, _status: coreConstant.entityStatus.ACTIVE },
+        order: [
+          [
+            databaseProvider.application.models.RolePermissions,
+            "priority",
+            "asc",
+          ],
+        ],
+      }
+    );
     //Group child role permissions
     rolePermissions = await groupRolePermissionData(rolePermissions, roleId);
 
     //Get user permissions
-    let userPermissions = await databaseActions.findAll("application","Permissions",{
-      include: [
-        {
-          model: databaseProvider.application.models.UserPermissions,
-          attributes: ["id", "priority"],
-          required: true,
-          where: {
-            userId: req.user.userId,
-            _status: coreConstant.entityStatus.ACTIVE,
+    let userPermissions = await databaseActions.findAll(
+      "application",
+      "Permissions",
+      {
+        include: [
+          {
+            model: databaseProvider.application.models.UserPermissions,
+            attributes: ["id", "priority"],
+            required: true,
+            where: {
+              userId: req.user.userId,
+              _status: coreConstant.entityStatus.ACTIVE,
+            },
           },
-        },
-      ],
-      where: { parentId: null, _status: coreConstant.entityStatus.ACTIVE },
-      order: [[databaseProvider.application.models.UserPermissions, "priority", "asc"]],
-    });
+        ],
+        where: { parentId: null, _status: coreConstant.entityStatus.ACTIVE },
+        order: [
+          [
+            databaseProvider.application.models.UserPermissions,
+            "priority",
+            "asc",
+          ],
+        ],
+      }
+    );
     //Group child user permissions
     userPermissions = await groupUserPermissionData(
       userPermissions,
@@ -113,14 +156,14 @@ const getRolePermissions = async (req, res) => {
     );
 
     //get the priority key from rolepermission
-    rolePermissions = rolePermissions.map((a) => {
+    rolePermissions = rolePermissions.map((a: any) => {
       return {
         ...a.dataValues,
         priority: a.dataValues.RolePermissions[0].priority,
       };
     });
     userPermissions = userPermissions
-      ? userPermissions.map((a) => {
+      ? userPermissions.map((a: any) => {
         return {
           ...a.dataValues,
           priority: a.dataValues.UserPermissions[0].priority,
@@ -147,12 +190,12 @@ const getRolePermissions = async (req, res) => {
   }
 };
 // eslint-disable-next-line no-unused-vars
-const getUserSearchPaginatedFunc = async (req, res) => {
-  let name = "%" + req.query.input + "%";
-  let roleOb = {};
+const getUserSearchPaginatedFunc = async (req: any, res: any) => {
+  const name = "%" + req.query.input + "%";
+  const roleOb: any = {};
   if (req.query.role) roleOb.role = req.query.role;
   console.log("NAME", name);
-  let baseQuery = {
+  const baseQuery = {
     [databaseProvider.application.Sequelize.Op.or]: [
       {
         email: {
@@ -166,11 +209,11 @@ const getUserSearchPaginatedFunc = async (req, res) => {
       },
     ],
   };
-  let pageQuery = {};
+  const pageQuery: any = {};
   pageQuery["start"] = req.query.start;
   pageQuery["length"] = req.query.length;
-  
-  let data = await paginate(
+
+  const data = await paginate(
     databaseProvider.application.models.Users,
     [
       {
@@ -182,7 +225,10 @@ const getUserSearchPaginatedFunc = async (req, res) => {
             as: "Person",
             include: [
               { model: databaseProvider.application.models.Relations },
-              { model: databaseProvider.application.models.Persons, as: "RelatedPerson" },
+              {
+                model: databaseProvider.application.models.Persons,
+                as: "RelatedPerson",
+              },
             ],
           },
         ],
@@ -198,15 +244,15 @@ const getUserSearchPaginatedFunc = async (req, res) => {
     pageQuery
   );
   console.log("Users match fetched successfully", data.totalRecords);
-  let finalRows = [];
+  const finalRows: any = [];
   for (let i = 0; i < data.rows.length; i++) {
-    let x = data.rows[i];
+    const x: any = data.rows[i];
     // eslint-disable-next-line no-unsafe-optional-chaining
-    let relatives = [...x?.Person?.Person];
-    let r = delete x?.Person?.Person;
+    const relatives: any = [...x?.Person?.Person];
+    const r = delete x?.Person?.Person;
     console.log("DELETING", r, ", relatives:", relatives?.length);
     finalRows.push(x);
-    relatives?.forEach((relative) => {
+    relatives?.forEach((relative: any) => {
       finalRows.push({
         Person: relative.RelatedPerson,
         Relation: relative.Relation,
@@ -230,11 +276,15 @@ const getUserSearchPaginatedFunc = async (req, res) => {
   };
 };
 
-
-async function paginate(model, inculdeOb, whereOb, pageQuery) {
+async function paginate(
+  model: any,
+  inculdeOb: any,
+  whereOb: any,
+  pageQuery: any
+) {
   console.log("pageQuery", inculdeOb, whereOb, pageQuery);
   try {
-    let data = await databaseActions.findAll("application","Users",{
+    const data = await databaseActions.findAll("application", "Users", {
       // benchmark: true,
       // logging: console.log,
       include: inculdeOb,
@@ -250,7 +300,7 @@ async function paginate(model, inculdeOb, whereOb, pageQuery) {
       order: [[pageQuery?.orderBy || "id", pageQuery?.order || "desc"]],
     });
 
-    let totalRecords = await databaseProvider.application.models.Users.count({
+    const totalRecords = await databaseProvider.application.models.Users.count({
       include: inculdeOb,
       where: whereOb,
       distinct: true,
@@ -263,14 +313,10 @@ async function paginate(model, inculdeOb, whereOb, pageQuery) {
     );
     console.log("Paginated", data.length, totalRecords);
     return { totalRecords, rows: data };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in pagination", error);
     throw "Pagination error";
   }
 }
 
-
-module.exports = {
-  getRolePermissions,
-  getUserSearchPaginatedFunc
-};
+export { getRolePermissions, getUserSearchPaginatedFunc };

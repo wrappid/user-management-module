@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export const LoginLogs = (sequelize: any, DataTypes: any) => {
   const loginLogs = sequelize.define("LoginLogs", {
     id: {
       type: DataTypes.INTEGER,
@@ -34,27 +34,29 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  loginLogs.associate = (models) => {
-    loginLogs.belongsTo(models.Users, {
-      foreignKey: "createdBy",
-      as: "Owner",
-      sourceKey: "id",
-    });
-    loginLogs.belongsTo(models.Users, {
-      foreignKey: "updatedBy",
-      as: "Updater",
-      sourceKey: "id",
-    });
-    loginLogs.belongsTo(models.Users, {
-      foreignKey: "userId",
-      as: "User",
-      sourceKey: "id",
-    });
-    loginLogs.belongsTo(models.Users, {
-      foreignKey: "deletedBy",
-      as: "Destroyer",
-      sourceKey: "id",
-    });
+  loginLogs.associate = (models: any) => {
+    if(models.users){
+      loginLogs.belongsTo(models.Users, {
+        foreignKey: "createdBy",
+        as: "Owner",
+        sourceKey: "id",
+      });
+      loginLogs.belongsTo(models.Users, {
+        foreignKey: "updatedBy",
+        as: "Updater",
+        sourceKey: "id",
+      });
+      loginLogs.belongsTo(models.Users, {
+        foreignKey: "userId",
+        as: "User",
+        sourceKey: "id",
+      });
+      loginLogs.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
   };
 
   return loginLogs;

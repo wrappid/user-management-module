@@ -134,3 +134,8 @@ dist
 
 # mac
 .DS_Store
+
+# Config Files
+.husky/
+.github/
+scripts/

@@ -1,0 +1,66 @@
+export const RolePermissions = (sequelize: any, DataTypes: any) => {
+  const rolePermissions = sequelize.define("RolePermissions", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    filter: {
+      type: DataTypes.JSONB,
+      defaultValue: null,
+    },
+    priority: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    isVisible: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    _status: {
+      type: DataTypes.STRING,
+    },
+    deletedAt: {
+      type: "TIMESTAMP",
+      allowNull: true,
+    },
+  });
+
+  rolePermissions.associate = (models: any) => {
+    if (models.Roles ) {
+      rolePermissions.belongsTo(models.Roles, {
+        foreignKey: "roleId",
+        sourceKey: "id",
+      });
+    }
+    if(models.Permissions){
+      rolePermissions.belongsTo(models.Permissions, {
+        foreignKey: "permissionId",
+        sourceKey: "id",
+      });
+    }
+    if(models.users){
+      rolePermissions.belongsTo(models.Users, {
+        foreignKey: "createdBy",
+        as: "Owner",
+        sourceKey: "id",
+      });
+      rolePermissions.belongsTo(models.Users, {
+        foreignKey: "updatedBy",
+        as: "Updater",
+        sourceKey: "id",
+      });
+      rolePermissions.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
+  };
+
+  return rolePermissions;
+};

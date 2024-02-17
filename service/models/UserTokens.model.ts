@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export const UserTokens = (sequelize: any, DataTypes: any) => {
   const userTokens = sequelize.define("UserTokens", {
     id: {
       type: DataTypes.INTEGER,
@@ -34,27 +34,29 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  userTokens.associate = (models) => {
-    userTokens.belongsTo(models.Users, {
-      foreignKey: "userId",
-      as: "User",
-      sourceKey: "id",
-    });
-    userTokens.belongsTo(models.Users, {
-      foreignKey: "createdBy",
-      as: "Owner",
-      sourceKey: "id",
-    });
-    userTokens.belongsTo(models.Users, {
-      foreignKey: "updatedBy",
-      as: "Updater",
-      sourceKey: "id",
-    });
-    userTokens.belongsTo(models.Users, {
-      foreignKey: "deletedBy",
-      as: "Destroyer",
-      sourceKey: "id",
-    });
+  userTokens.associate = (models: any) => {
+    if (models.Users) {
+      userTokens.belongsTo(models.Users, {
+        foreignKey: "userId",
+        as: "User",
+        sourceKey: "id",
+      });
+      userTokens.belongsTo(models.Users, {
+        foreignKey: "createdBy",
+        as: "Owner",
+        sourceKey: "id",
+      });
+      userTokens.belongsTo(models.Users, {
+        foreignKey: "updatedBy",
+        as: "Updater",
+        sourceKey: "id",
+      });
+      userTokens.belongsTo(models.Users, {
+        foreignKey: "deletedBy",
+        as: "Destroyer",
+        sourceKey: "id",
+      });
+    }
   };
 
   return userTokens;
