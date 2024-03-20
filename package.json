@@ -12,7 +12,8 @@
     "code:format:app": "npm run code:lint:app -- --fix",
     "code:lint:service": "eslint -c .eslintrc.js --ignore-path .gitignore service",
     "code:format:service": "npm run code:lint:service -- --fix",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "jest",
+    "release": "standard-version --bumpFiles ./package.json ./package-lock.json "
   },
   "license": "MIT",
   "author": {
@@ -33,10 +34,11 @@
     "template"
   ],
   "devDependencies": {
-    "@commitlint/cli": "^17.5.0",
-    "@commitlint/config-conventional": "^17.4.4",
-    "@commitlint/prompt-cli": "^17.5.0",
-    "@faker-js/faker": "^8.1.0",
+    "@commitlint/cli": "~17.5.0",
+    "@commitlint/config-conventional": "~17.4.4",
+    "@commitlint/prompt-cli": "~17.5.0",
+    "@faker-js/faker": "~8.1.0",
+    "@types/supertest": "^6.0.2",
     "@wrappid/core": "latest",
     "@wrappid/service-core": "latest",
     "@wrappid/styles": "latest",
