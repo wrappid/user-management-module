@@ -5,12 +5,17 @@ import RolePermissionForm from "./RolePermissionForm";
 export default function RolePermission() {
 
   return (
-    <CoreBox>
-      <CoreDataTable
-        hideForm={true}
-        entity={"Roles"}
-        preRenderDetailsPaneComponent={RolePermissionForm}
-      />
-    </CoreBox>
+    <>
+      <CoreLayoutItem id={AppContainerLayout.PLACEHOLDER.CONTENT}>
+        <CoreBox>
+          <CoreDataTable
+            hideForm={true}
+            entity={"Roles"}
+            preRenderDetailsPaneComponent={RolePermissionForm}
+          />
+        </CoreBox>
+      </CoreLayoutItem>
+    </>
+
   );
 }

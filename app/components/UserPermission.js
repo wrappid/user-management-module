@@ -7,8 +7,8 @@ export default function UserPermission() {
     { id: "id", label: "ID" },
     { id: "email", label: "Email" },
     {
-      id    : "role",
-      label : "Role",
+      id: "role",
+      label: "Role",
       render: (cellData, rowData) => {
         return <>{rowData["Role.role"]}</>;
       },
@@ -16,13 +16,17 @@ export default function UserPermission() {
   ];
 
   return (
-    <CoreBox>
-      <CoreDataTable
-        hideForm={true}
-        entity={"RxefyUsers"}
-        columns={columns}
-        preRenderDetailsPaneComponent={UserPermissionForm}
-      />
-    </CoreBox>
+    <>
+      <CoreLayoutItem id={AppContainerLayout.PLACEHOLDER.CONTENT}>
+        <CoreBox>
+          <CoreDataTable
+            hideForm={true}
+            entity={"RxefyUsers"}
+            columns={columns}
+            preRenderDetailsPaneComponent={UserPermissionForm}
+          />
+        </CoreBox>
+      </CoreLayoutItem>
+    </>
   );
 }
