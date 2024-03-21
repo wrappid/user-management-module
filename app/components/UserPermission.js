@@ -1,4 +1,4 @@
-import { CoreDataTable, CoreBox } from "@wrappid/core";
+import { CoreDataTable, CoreBox, CoreLayoutItem, AppContainerLayout } from "@wrappid/core";
 
 import UserPermissionForm from "./UserPermissionForm";
 
@@ -16,13 +16,17 @@ export default function UserPermission() {
   ];
 
   return (
-    <CoreBox>
-      <CoreDataTable
-        hideForm={true}
-        entity={"RxefyUsers"}
-        columns={columns}
-        preRenderDetailsPaneComponent={UserPermissionForm}
-      />
-    </CoreBox>
+    <>
+      <CoreLayoutItem id={AppContainerLayout.PLACEHOLDER.CONTENT}>
+        <CoreBox>
+          <CoreDataTable
+            hideForm={true}
+            entity={"RxefyUsers"}
+            columns={columns}
+            preRenderDetailsPaneComponent={UserPermissionForm}
+          />
+        </CoreBox>
+      </CoreLayoutItem>
+    </>
   );
 }
