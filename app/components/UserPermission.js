@@ -1,4 +1,4 @@
-import { CoreDataTable, CoreBox } from "@wrappid/core";
+import { CoreDataTable, CoreBox, CoreLayoutItem, AppContainerLayout } from "@wrappid/core";
 
 import UserPermissionForm from "./UserPermissionForm";
 
@@ -7,8 +7,8 @@ export default function UserPermission() {
     { id: "id", label: "ID" },
     { id: "email", label: "Email" },
     {
-      id: "role",
-      label: "Role",
+      id    : "role",
+      label : "Role",
       render: (cellData, rowData) => {
         return <>{rowData["Role.role"]}</>;
       },

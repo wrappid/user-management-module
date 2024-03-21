@@ -1,4 +1,4 @@
-import { CoreDataTable, FORM_IDS } from "@wrappid/core";
+import { AppContainerLayout, CoreDataTable, CoreLayoutItem, FORM_IDS } from "@wrappid/core";
 
 export default function RxUser() {
   return (
