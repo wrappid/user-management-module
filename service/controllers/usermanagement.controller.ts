@@ -26,7 +26,7 @@ const getUserSearchPaginated = async (req: any, res: any) => {
     res.status(data.status).json(data);
   } catch (err: any) {
     console.log(err);
-    res.status(500).json({ message: err });
+    res.status(500).json({ message: err.message });
   }
 };
 export { rolePermission, getUserSearchPaginated };

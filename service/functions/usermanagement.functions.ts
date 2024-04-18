@@ -191,89 +191,94 @@ const getRolePermissions = async (req: any, res: any) => {
 };
 // eslint-disable-next-line no-unused-vars
 const getUserSearchPaginatedFunc = async (req: any, res: any) => {
-  const name = "%" + req.query.input + "%";
-  const roleOb: any = {};
-  if (req.query.role) roleOb.role = req.query.role;
-  console.log("NAME", name);
-  const baseQuery = {
-    [databaseProvider.application.Sequelize.Op.or]: [
-      {
-        email: {
-          [databaseProvider.application.Sequelize.Op.iLike]: name.toLowerCase(),
-        },
-      },
-      {
-        phone: {
-          [databaseProvider.application.Sequelize.Op.iLike]: name.toLowerCase(),
-        },
-      },
-    ],
-  };
-  const pageQuery: any = {};
-  pageQuery["start"] = req.query.start;
-  pageQuery["length"] = req.query.length;
-
-  const data = await paginate(
-    databaseProvider.application.models.Users,
-    [
-      {
-        model: databaseProvider.application.models.Persons,
-        as: "Person",
-        include: [
-          {
-            model: databaseProvider.application.models.PersonRelations,
-            as: "Person",
-            include: [
-              { model: databaseProvider.application.models.Relations },
-              {
-                model: databaseProvider.application.models.Persons,
-                as: "RelatedPerson",
-              },
-            ],
+  try {
+    const name = "%" + req.query.input + "%";
+    const roleOb: any = {};
+    if (req.query.role) roleOb.role = req.query.role;
+    console.log("NAME", name);
+    const baseQuery = {
+      [databaseProvider.application.Sequelize.Op.or]: [
+        {
+          email: {
+            [databaseProvider.application.Sequelize.Op.iLike]: name.toLowerCase(),
           },
-        ],
-      },
-      {
-        model: databaseProvider.application.models.Roles,
-        where: roleOb,
-        as: "Role",
-        attributes: ["id", "role"],
-      },
-    ],
-    baseQuery,
-    pageQuery
-  );
-  console.log("Users match fetched successfully", data.totalRecords);
-  const finalRows: any = [];
-  for (let i = 0; i < data.rows.length; i++) {
-    const x: any = data.rows[i];
-    // eslint-disable-next-line no-unsafe-optional-chaining
-    const relatives: any = [...x?.Person?.Person];
-    const r = delete x?.Person?.Person;
-    console.log("DELETING", r, ", relatives:", relatives?.length);
-    finalRows.push(x);
-    relatives?.forEach((relative: any) => {
-      finalRows.push({
-        Person: relative.RelatedPerson,
-        Relation: relative.Relation,
-        RootPerson: {
-          id: x.Person.id,
-          firstName: x.Person.firstName,
-          middleName: x.Person.middleName,
-          lastName: x.Person.lastName,
         },
-        email: x.email,
-        phone: x.phone,
+        {
+          phone: {
+            [databaseProvider.application.Sequelize.Op.iLike]: name.toLowerCase(),
+          },
+        },
+      ],
+    };
+    const pageQuery: any = {};
+    pageQuery["start"] = req.query.start;
+    pageQuery["length"] = req.query.length;
+
+    const data = await paginate(
+      databaseProvider.application.models.Users,
+      [
+        {
+          model: databaseProvider.application.models.Persons,
+          as: "Person",
+          include: [
+            {
+              model: databaseProvider.application.models.PersonRelations,
+              as: "Person",
+              include: [
+                { model: databaseProvider.application.models.Relations },
+                {
+                  model: databaseProvider.application.models.Persons,
+                  as: "RelatedPerson",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          model: databaseProvider.application.models.Roles,
+          where: roleOb,
+          as: "Role",
+          attributes: ["id", "role"],
+        },
+      ],
+      baseQuery,
+      pageQuery
+    );
+    console.log("Users match fetched successfully", data.totalRecords);
+    const finalRows: any = [];
+    for (let i = 0; i < data.rows.length; i++) {
+      const x: any = data.rows[i];
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      const relatives: any = [...x?.Person?.Person];
+      const r = delete x?.Person?.Person;
+      console.log("DELETING", r, ", relatives:", relatives?.length);
+      finalRows.push(x);
+      relatives?.forEach((relative: any) => {
+        finalRows.push({
+          Person: relative.RelatedPerson,
+          Relation: relative.Relation,
+          RootPerson: {
+            id: x.Person.id,
+            firstName: x.Person.firstName,
+            middleName: x.Person.middleName,
+            lastName: x.Person.lastName,
+          },
+          email: x.email,
+          phone: x.phone,
+        });
       });
-    });
+    }
+    data.rows = finalRows;
+    data.totalRecords = finalRows.length;
+    return {
+      status: 200,
+      message: "Users match successfully",
+      data: data,
+    };
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
-  data.rows = finalRows;
-  data.totalRecords = finalRows.length;
-  return {
-    status: 200,
-    message: "Users match successfully",
-    data: data,
-  };
 };
 
 async function paginate(
