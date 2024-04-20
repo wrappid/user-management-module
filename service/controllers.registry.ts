@@ -1,4 +1,5 @@
 import { CoreMiddlewaresRegistry } from "@wrappid/service-core";
+import { postRolePermissionsMap } from "./controllers/permission.controller";
 import * as usermanagementController from "./controllers/usermanagement.controller";
 import { rolePermissionGET } from "./validations/usermanagement.validation";
 // const CoreMiddleware =
@@ -9,7 +10,7 @@ const ControllersRegistry = {
     usermanagementController.rolePermission,
   ],
   getUserSearchPaginated: [usermanagementController.getUserSearchPaginated],
-  //CoreMiddlewaresRegistry.validation(getUserSearchPaginated)
+  postRolePermissionsMap: postRolePermissionsMap
 };
 
 export default ControllersRegistry;
