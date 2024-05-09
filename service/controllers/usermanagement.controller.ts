@@ -7,11 +7,11 @@ import * as usermanagementFunctions from "../functions/usermanagement.functions"
 const rolePermission = async (req: any, res: any) => {
   try {
     const data = await usermanagementFunctions.getRolePermissions(req, res);
-    console.log("Role permissions fethed ");
+    console.log("Role permissions fetched ");
     res.status(data.status).json(data);
   } catch (err: any) {
     console.log(err);
-    res.status(500).json({ message: "Role permissions fethed" });
+    res.status(500).json({ message: err.message });
   }
 };
 
