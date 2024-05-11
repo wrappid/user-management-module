@@ -15,7 +15,7 @@ export default function RolePermissionForm(props) {
       payload: data,
       type   : __SET_ROLE,
     });
-  }, []);
+  }, [data]);
 
   return (
     <CoreForm

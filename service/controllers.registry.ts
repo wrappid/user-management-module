@@ -10,7 +10,7 @@ const ControllersRegistry = {
     usermanagementController.rolePermission,
   ],
   getUserSearchPaginated: [usermanagementController.getUserSearchPaginated],
-  postRolePermissionsMap: postRolePermissionsMap
+  postRolePermissionsMap: [postRolePermissionsMap]
 };
 
 export default ControllersRegistry;

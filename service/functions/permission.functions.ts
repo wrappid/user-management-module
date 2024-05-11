@@ -6,6 +6,13 @@ export async function createRolePermissions(req: any) {
   const database:string = <string>req.query?.database || "application";
   
   const result = await databaseProvider[database].sequelize.transaction(async (transaction: any) => {
+    
+    const existingPermission = await databaseActions.findAll(database, "RolePermissions", {
+      where: {
+        _status: coreConstant.entityStatus.ACTIVE,
+        roleId: roleId,
+      }
+    });
     const nrows = await databaseActions.update(database,"RolePermissions", {
       _status: coreConstant.entityStatus.INACTIVE,
       updatedBy: req.user.userId,
@@ -17,11 +24,12 @@ export async function createRolePermissions(req: any) {
     }
     );
   
-    if (nrows < 1) {
+    if (nrows != existingPermission.length) {
       throw "Update old role permissions error";
+    }else{
+      console.log("Old entries updated: ", nrows);
     }
   
-    console.log("Old entries updated: ", nrows);
   
     let count = 0;
   
