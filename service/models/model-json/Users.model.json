@@ -1,0 +1,219 @@
+{
+  "table": "Users",
+  "database": "application",
+  "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    "email": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "phone": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "password": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "availableTokens": {
+      "type": "FLOAT",
+      "defaultValue": 0
+    },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
+    "firstLogin": {
+      "type": "BOOLEAN",
+      "defaultValue": false
+    },
+    "_status": {
+      "type": "STRING"
+    },
+    "deletedAt": {
+      "type": "DATE",
+      "allowNull": true
+    }
+  },
+  "associations": [
+    {
+      "model": "Persons",
+      "data": [
+        {
+          "type": "hasOne",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id",
+            "as": "Person"
+          }
+        }
+      ]
+    },
+    {
+      "model": "Roles",
+      "data": [
+        {
+          "type": "belongsTo",
+          "data": {
+            "as": "Role",
+            "foreignKey": "roleId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "UserPermissions",
+      "data": [
+        {
+          "type": "hasOne",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "MailComms",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "SessionManagers",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "ApiLogs",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "LoginLogs",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "Payments",
+      "data": [
+        {
+          "type": "hasOne",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "Otps",
+      "data": [
+        {
+          "type": "hasOne",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "SmsComms",
+      "data": [
+        {
+          "type": "hasOne",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "UserTokens",
+      "data": [
+        {
+          "type": "hasOne",
+          "data": {
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "Applications",
+      "data": [
+        {
+          "type": "hasOne",
+          "data": {
+            "foreignKey": "employeeId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "data": [
+        {
+          "data": {
+            "as": "Owner",
+            "sourceKey": "id",
+            "foreignKey": "createdBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Updater",
+            "sourceKey": "id",
+            "foreignKey": "updatedBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Destroyer",
+            "sourceKey": "id",
+            "foreignKey": "deletedBy"
+          },
+          "type": "belongsTo"
+        }
+      ],
+      "model": "Users"
+    }
+  ]
+}

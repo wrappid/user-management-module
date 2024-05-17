@@ -1,0 +1,214 @@
+{
+  "table": "Persons",
+  "database": "application",
+  "attributes": {
+    "_status": {
+      "type": "STRING"
+    },
+    "deletedAt": {
+      "allowNull": true,
+      "type": "DATE"
+    },
+    "dob": {
+      "defaultValue": "",
+      "type": "DATE"
+    },
+    "emailVerified": {
+      "defaultValue": false,
+      "type": "BOOLEAN"
+    },
+    "extraInfo": {
+      "defaultValue": null,
+      "type": "JSONB"
+    },
+    "firstName": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "gender": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "height": {
+      "defaultValue": null,
+      "type": "FLOAT"
+    },
+    "id": {
+      "autoIncrement": true,
+      "primaryKey": true,
+      "type": "INTEGER"
+    },
+    "isActive": {
+      "defaultValue": true,
+      "type": "BOOLEAN"
+    },
+    "isVerified": {
+      "defaultValue": false,
+      "type": "BOOLEAN"
+    },
+    "lastName": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "medicalId": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "middleName": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "phoneVerified": {
+      "defaultValue": false,
+      "type": "BOOLEAN"
+    },
+    "photoUrl": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "profileId": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "rating": {
+      "defaultValue": null,
+      "type": "FLOAT"
+    },
+    "userInvitationToken": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "website": {
+      "defaultValue": "",
+      "type": "STRING"
+    },
+    "weight": {
+      "defaultValue": null,
+      "type": "FLOAT"
+    }
+  },
+  "associations": [
+    {
+      "model": "Users",
+      "data": [
+        {
+          "type": "belongsTo",
+          "data": {
+            "as": "User",
+            "foreignKey": "userId",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "as": "Owner",
+            "foreignKey": "createdBy",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "as": "Updater",
+            "foreignKey": "updatedBy",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "as": "Destroyer",
+            "foreignKey": "deletedBy",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {}
+        }
+      ]
+    },
+    {
+      "model": "Persons",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "as": "Person",
+            "foreignKey": "personId",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "hasMany",
+          "data": {
+            "as": "RelatedPersons",
+            "foreignKey": "relatedPersonId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "PersonContacts",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "personId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "PersonAddresses",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "personId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "PersonEducations",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "personId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "PersonExperiences",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "personId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "personId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    }
+  ]
+}

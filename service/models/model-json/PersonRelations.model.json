@@ -1,0 +1,90 @@
+{
+  "table": "PersonRelations",
+  "database": "application",
+  "attributes": {
+    "_status": {
+      "type": "STRING"
+    },
+    "deletedAt": {
+      "allowNull": true,
+      "type": "DATE"
+    },
+    "extraInfo": {
+      "defaultValue": null,
+      "type": "JSONB"
+    },
+    "id": {
+      "autoIncrement": true,
+      "primaryKey": true,
+      "type": "INTEGER"
+    },
+    "isActive": {
+      "defaultValue": true,
+      "type": "BOOLEAN"
+    }
+  },
+  "associations": [
+    {
+      "data": [
+        {
+          "data": {
+            "as": "Owner",
+            "sourceKey": "id",
+            "foreignKey": "createdBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Updater",
+            "sourceKey": "id",
+            "foreignKey": "updatedBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Destroyer",
+            "sourceKey": "id",
+            "foreignKey": "deletedBy"
+          },
+          "type": "belongsTo"
+        }
+      ],
+      "model": "Users"
+    },
+    {
+      "model": "Persons",
+      "data": [
+        {
+          "type": "belongsTo",
+          "data": {
+            "as": "Person",
+            "foreignKey": "personId",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "as": "RelatedPerson",
+            "foreignKey": "relatedPersonId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "Relations",
+      "data": [
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "relationId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    }
+  ]
+}
