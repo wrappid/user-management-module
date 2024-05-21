@@ -27,7 +27,7 @@
       "type": "STRING"
     },
     "deletedAt": {
-      "type": "TIMESTAMP",
+      "type": "DATE",
       "allowNull": true
     }
   },
