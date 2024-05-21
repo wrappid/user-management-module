@@ -1,0 +1,68 @@
+{
+  "table": "UserSettings",
+  "database": "application",
+  "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    "name": {
+      "type": "STRING"
+    },
+    "label": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "value": {
+      "type": "JSON",
+      "defaultValue": {}
+    },
+    "_status": {
+      "type": "STRING"
+    },
+    "deletedAt": {
+      "type": "DATE",
+      "allowNull": true
+    }
+  },
+  "associations": [
+    {
+      "data": [
+        {
+          "data": {
+            "as": "Owner",
+            "sourceKey": "id",
+            "foreignKey": "createdBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Updater",
+            "sourceKey": "id",
+            "foreignKey": "updatedBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Destroyer",
+            "sourceKey": "id",
+            "foreignKey": "deletedBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "foreignKey": "userId",
+            "as": "User",
+            "sourceKey": "id"
+          },
+          "type": "belongsTo"
+        }
+      ],
+      "model": "Users"
+    }
+  ]
+}

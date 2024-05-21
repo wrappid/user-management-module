@@ -1,0 +1,78 @@
+{
+  "table": "UserPermissions",
+  "database": "application",
+  "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
+    "filter": {
+      "type": "JSONB",
+      "defaultValue": null
+    },
+    "priority": {
+      "type": "INTEGER",
+      "defaultValue": 0
+    },
+    "_status": {
+      "type": "STRING"
+    },
+    "deletedAt": {
+      "type": "DATE",
+      "allowNull": true
+    }
+  },
+  "associations": [
+    {
+      "data": [
+        {
+          "data": {
+            "as": "Owner",
+            "sourceKey": "id",
+            "foreignKey": "createdBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Updater",
+            "sourceKey": "id",
+            "foreignKey": "updatedBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Destroyer",
+            "sourceKey": "id",
+            "foreignKey": "deletedBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "userId",
+            "as": "User",
+            "sourceKey": "id"
+          }
+        }
+      ],
+      "model": "Users"
+    },
+    {
+      "model": "Permissions",
+      "data": [
+        {
+          "foreignKey": "permissionId",
+          "sourceKey": "id"
+        }
+      ]
+    }
+  ]
+}

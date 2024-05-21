@@ -1,0 +1,85 @@
+{
+  "table": "LoginLogs",
+  "database": "application",
+  "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    "route": {
+      "type": "STRING",
+      "defaultValue": null
+    },
+    "message": {
+      "type": "STRING",
+      "defaultValue": null
+    },
+    "status": {
+      "type": "STRING",
+      "defaultValue": null
+    },
+    "extraInfo": {
+      "type": "JSONB",
+      "defaultValue": null
+    },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
+    "_status": {
+      "type": "STRING"
+    },
+    "deletedAt": {
+      "type": "DATE",
+      "allowNull": true
+    }
+  },
+  "associations": [
+    {
+      "model": "Users",
+      "data": [
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "createdBy",
+            "as": "Owner",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "updatedBy",
+            "as": "Updater",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "updatedBy",
+            "as": "Updater",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "userId",
+            "as": "User",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "deletedBy",
+            "as": "Destroyer",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    }
+  ]
+}

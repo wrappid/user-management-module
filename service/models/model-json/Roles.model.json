@@ -1,0 +1,80 @@
+{
+  "table": "Roles",
+  "database": "application",
+  "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    "role": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "priority": {
+      "type": "INTEGER",
+      "defaultValue": 0
+    },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
+    "_status": {
+      "type": "STRING"
+    },
+    "deletedAt": {
+      "type": "DATE",
+      "allowNull": true
+    }
+  },
+  "associations": [
+    {
+      "data": [
+        {
+          "data": {
+            "as": "Owner",
+            "sourceKey": "id",
+            "foreignKey": "createdBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Updater",
+            "sourceKey": "id",
+            "foreignKey": "updatedBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "as": "Destroyer",
+            "sourceKey": "id",
+            "foreignKey": "deletedBy"
+          },
+          "type": "belongsTo"
+        },
+        {
+          "data": {
+            "foreignKey": "roleId",
+            "sourceKey": "id"
+          },
+          "type": "hasMany"
+        }
+      ],
+      "model": "Users"
+    },
+    {
+      "model": "RolePermissions",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "roleId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    }
+  ]
+}

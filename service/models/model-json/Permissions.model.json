@@ -1,0 +1,104 @@
+{
+  "table": "Permissions",
+  "database": "application",
+  "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    "name": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "label": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "type": {
+      "type": "STRING",
+      "defaultValue": "menuitem"
+    },
+    "link": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "icon": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "appComponent": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "_status": {
+      "type": "STRING"
+    },
+    "deletedAt": {
+      "type": "DATE",
+      "allowNull": true
+    }
+  },
+  "associations": [
+    {
+      "model": "RolePermissions",
+      "data": [
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "permissionId",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "hasMany",
+          "data": {
+            "foreignKey": "permissionId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "Permissions",
+      "data": [
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "parentId",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    },
+    {
+      "model": "Users",
+      "data": [
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "createdBy",
+            "as": "Owner",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "updatedBy",
+            "as": "Updater",
+            "sourceKey": "id"
+          }
+        },
+        {
+          "type": "belongsTo",
+          "data": {
+            "foreignKey": "updatedBy",
+            "as": "Updater",
+            "sourceKey": "id"
+          }
+        }
+      ]
+    }
+  ]
+}
