@@ -2,39 +2,39 @@
   "table": "PersonContacts",
   "database": "application",
   "attributes": {
-    "_status": {
-      "type": "STRING"
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
     },
     "data": {
-      "defaultValue": "",
-      "type": "STRING"
-    },
-    "deletedAt": {
-      "allowNull": true,
-      "type": "DATE"
-    },
-    "id": {
-      "autoIncrement": true,
-      "primaryKey": true,
-      "type": "INTEGER"
-    },
-    "isActive": {
-      "defaultValue": true,
-      "type": "BOOLEAN"
-    },
-    "notificationFlag": {
-      "defaultValue": false,
-      "type": "BOOLEAN"
-    },
-    "primaryFlag": {
-      "defaultValue": false,
-      "type": "BOOLEAN"
+      "type": "STRING",
+      "defaultValue": ""
     },
     "type": {
       "type": "STRING",
       "defaultValue": ""
     },
+    "_status": {
+      "type": "STRING"
+    },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
     "verified": {
+      "type": "BOOLEAN",
+      "defaultValue": false
+    },
+    "deletedAt": {
+      "type": "DATE",
+      "allowNull": true
+    },
+    "primaryFlag": {
+      "type": "BOOLEAN",
+      "defaultValue": false
+    },
+    "notificationFlag": {
       "type": "BOOLEAN",
       "defaultValue": false
     }
@@ -70,16 +70,16 @@
       "model": "Users"
     },
     {
-      "model": "Persons",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "personId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "personId"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Persons"
     }
   ]
 }

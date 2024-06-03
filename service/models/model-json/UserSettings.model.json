@@ -55,9 +55,9 @@
         },
         {
           "data": {
-            "foreignKey": "userId",
             "as": "User",
-            "sourceKey": "id"
+            "sourceKey": "id",
+            "foreignKey": "userId"
           },
           "type": "belongsTo"
         }

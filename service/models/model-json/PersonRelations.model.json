@@ -2,25 +2,25 @@
   "table": "PersonRelations",
   "database": "application",
   "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
     "_status": {
       "type": "STRING"
     },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
     "deletedAt": {
-      "allowNull": true,
-      "type": "DATE"
+      "type": "DATE",
+      "allowNull": true
     },
     "extraInfo": {
-      "defaultValue": null,
-      "type": "JSONB"
-    },
-    "id": {
-      "autoIncrement": true,
-      "primaryKey": true,
-      "type": "INTEGER"
-    },
-    "isActive": {
-      "defaultValue": true,
-      "type": "BOOLEAN"
+      "type": "JSONB",
+      "defaultValue": null
     }
   },
   "associations": [
@@ -54,37 +54,37 @@
       "model": "Users"
     },
     {
-      "model": "Persons",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
             "as": "Person",
-            "foreignKey": "personId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "personId"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
             "as": "RelatedPerson",
-            "foreignKey": "relatedPersonId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "relatedPersonId"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Persons"
     },
     {
-      "model": "Relations",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "relationId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "relationId"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Relations"
     }
   ]
 }

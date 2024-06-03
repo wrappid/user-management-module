@@ -7,11 +7,15 @@
       "primaryKey": true,
       "autoIncrement": true
     },
-    "name": {
+    "icon": {
       "type": "STRING",
       "defaultValue": ""
     },
-    "label": {
+    "link": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "name": {
       "type": "STRING",
       "defaultValue": ""
     },
@@ -19,15 +23,7 @@
       "type": "STRING",
       "defaultValue": "menuitem"
     },
-    "link": {
-      "type": "STRING",
-      "defaultValue": ""
-    },
-    "icon": {
-      "type": "STRING",
-      "defaultValue": ""
-    },
-    "appComponent": {
+    "label": {
       "type": "STRING",
       "defaultValue": ""
     },
@@ -37,68 +33,77 @@
     "deletedAt": {
       "type": "DATE",
       "allowNull": true
+    },
+    "appComponent": {
+      "type": "STRING",
+      "defaultValue": ""
     }
   },
   "associations": [
     {
-      "model": "RolePermissions",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "permissionId",
-            "sourceKey": "id"
-          }
-        },
-        {
-          "type": "hasMany",
-          "data": {
-            "foreignKey": "permissionId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "permissionId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "RolePermissions"
     },
     {
-      "model": "Permissions",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "parentId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "parentId"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Permissions"
     },
     {
-      "model": "Users",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "createdBy",
             "as": "Owner",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "createdBy"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "updatedBy",
             "as": "Updater",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "updatedBy"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "updatedBy",
-            "as": "Updater",
-            "sourceKey": "id"
-          }
+            "as": "Destroyer",
+            "sourceKey": "id",
+            "foreignKey": "deletedBy"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Users"
+    },
+    {
+      "data": [
+        {
+          "data": {
+            "sourceKey": "id",
+            "foreignKey": "permissionId"
+          },
+          "type": "hasMany"
+        }
+      ],
+      "model": "UserPermissions"
     }
   ]
 }

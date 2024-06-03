@@ -11,16 +11,16 @@
       "type": "STRING",
       "defaultValue": ""
     },
-    "priority": {
-      "type": "INTEGER",
-      "defaultValue": 0
+    "_status": {
+      "type": "STRING"
     },
     "isActive": {
       "type": "BOOLEAN",
       "defaultValue": true
     },
-    "_status": {
-      "type": "STRING"
+    "priority": {
+      "type": "INTEGER",
+      "defaultValue": 0
     },
     "deletedAt": {
       "type": "DATE",
@@ -56,8 +56,8 @@
         },
         {
           "data": {
-            "foreignKey": "roleId",
-            "sourceKey": "id"
+            "sourceKey": "id",
+            "foreignKey": "roleId"
           },
           "type": "hasMany"
         }
@@ -65,16 +65,16 @@
       "model": "Users"
     },
     {
-      "model": "RolePermissions",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "roleId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "roleId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "RolePermissions"
     }
   ]
 }

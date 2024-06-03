@@ -7,28 +7,28 @@
       "primaryKey": true,
       "autoIncrement": true
     },
-    "isActive": {
-      "type": "BOOLEAN",
-      "defaultValue": true
-    },
     "filter": {
       "type": "JSONB",
       "defaultValue": null
+    },
+    "_status": {
+      "type": "STRING"
+    },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
     },
     "priority": {
       "type": "INTEGER",
       "defaultValue": 0
     },
-    "isVisible": {
-      "type": "BOOLEAN",
-      "defaultValue": true
-    },
-    "_status": {
-      "type": "STRING"
-    },
     "deletedAt": {
       "type": "DATE",
       "allowNull": true
+    },
+    "isVisible": {
+      "type": "BOOLEAN",
+      "defaultValue": true
     }
   },
   "associations": [
@@ -62,28 +62,28 @@
       "model": "Users"
     },
     {
-      "model": "Roles",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "roleId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "roleId"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Roles"
     },
     {
-      "model": "Permissions",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "permissionId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "permissionId"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Permissions"
     }
   ]
 }

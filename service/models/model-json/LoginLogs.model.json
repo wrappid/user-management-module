@@ -11,75 +11,67 @@
       "type": "STRING",
       "defaultValue": null
     },
-    "message": {
-      "type": "STRING",
-      "defaultValue": null
-    },
     "status": {
       "type": "STRING",
       "defaultValue": null
     },
-    "extraInfo": {
-      "type": "JSONB",
+    "_status": {
+      "type": "STRING"
+    },
+    "message": {
+      "type": "STRING",
       "defaultValue": null
     },
     "isActive": {
       "type": "BOOLEAN",
       "defaultValue": true
     },
-    "_status": {
-      "type": "STRING"
-    },
     "deletedAt": {
       "type": "DATE",
       "allowNull": true
+    },
+    "extraInfo": {
+      "type": "JSONB",
+      "defaultValue": null
     }
   },
   "associations": [
     {
-      "model": "Users",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "createdBy",
             "as": "Owner",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "createdBy"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "updatedBy",
             "as": "Updater",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "updatedBy"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "updatedBy",
-            "as": "Updater",
-            "sourceKey": "id"
-          }
-        },
-        {
-          "type": "belongsTo",
-          "data": {
-            "foreignKey": "userId",
             "as": "User",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "deletedBy",
             "as": "Destroyer",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "deletedBy"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Users"
     }
   ]
 }

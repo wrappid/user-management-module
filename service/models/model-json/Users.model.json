@@ -15,176 +15,176 @@
       "type": "STRING",
       "defaultValue": ""
     },
-    "password": {
-      "type": "STRING",
-      "defaultValue": ""
-    },
-    "availableTokens": {
-      "type": "FLOAT",
-      "defaultValue": 0
+    "_status": {
+      "type": "STRING"
     },
     "isActive": {
       "type": "BOOLEAN",
       "defaultValue": true
     },
-    "firstLogin": {
-      "type": "BOOLEAN",
-      "defaultValue": false
-    },
-    "_status": {
-      "type": "STRING"
+    "password": {
+      "type": "STRING",
+      "defaultValue": ""
     },
     "deletedAt": {
       "type": "DATE",
       "allowNull": true
+    },
+    "firstLogin": {
+      "type": "BOOLEAN",
+      "defaultValue": false
+    },
+    "availableTokens": {
+      "type": "FLOAT",
+      "defaultValue": 0
     }
   },
   "associations": [
     {
-      "model": "Persons",
       "data": [
         {
-          "type": "hasOne",
           "data": {
-            "foreignKey": "userId",
+            "as": "Person",
             "sourceKey": "id",
-            "as": "Person"
-          }
+            "foreignKey": "userId"
+          },
+          "type": "hasOne"
         }
-      ]
+      ],
+      "model": "Persons"
     },
     {
-      "model": "Roles",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
             "as": "Role",
-            "foreignKey": "roleId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "roleId"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Roles"
     },
     {
-      "model": "UserPermissions",
       "data": [
         {
-          "type": "hasOne",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "UserPermissions"
     },
     {
-      "model": "MailComms",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "MailComms"
     },
     {
-      "model": "SessionManagers",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "SessionManagers"
     },
     {
-      "model": "ApiLogs",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "ApiLogs"
     },
     {
-      "model": "LoginLogs",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "LoginLogs"
     },
     {
-      "model": "Payments",
       "data": [
         {
-          "type": "hasOne",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "Payments"
     },
     {
-      "model": "Otps",
       "data": [
         {
-          "type": "hasOne",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "Otps"
     },
     {
-      "model": "SmsComms",
       "data": [
         {
-          "type": "hasOne",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "SmsComms"
     },
     {
-      "model": "UserTokens",
       "data": [
         {
-          "type": "hasOne",
           "data": {
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "UserTokens"
     },
     {
-      "model": "Applications",
       "data": [
         {
-          "type": "hasOne",
           "data": {
-            "foreignKey": "employeeId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "employeeId"
+          },
+          "type": "hasOne"
         }
-      ]
+      ],
+      "model": "Applications"
     },
     {
       "data": [

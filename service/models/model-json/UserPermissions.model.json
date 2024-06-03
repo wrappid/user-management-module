@@ -7,20 +7,20 @@
       "primaryKey": true,
       "autoIncrement": true
     },
-    "isActive": {
-      "type": "BOOLEAN",
-      "defaultValue": true
-    },
     "filter": {
       "type": "JSONB",
       "defaultValue": null
     },
+    "_status": {
+      "type": "STRING"
+    },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
     "priority": {
       "type": "INTEGER",
       "defaultValue": 0
-    },
-    "_status": {
-      "type": "STRING"
     },
     "deletedAt": {
       "type": "DATE",
@@ -55,24 +55,27 @@
           "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
-            "foreignKey": "userId",
             "as": "User",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "belongsTo"
         }
       ],
       "model": "Users"
     },
     {
-      "model": "Permissions",
       "data": [
         {
-          "foreignKey": "permissionId",
-          "sourceKey": "id"
+          "data": {
+            "sourceKey": "id",
+            "foreignKey": "permissionId"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Permissions"
     }
   ]
 }
