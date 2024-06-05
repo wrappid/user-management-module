@@ -2,29 +2,29 @@
   "table": "Relations",
   "database": "application",
   "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    "name": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
     "_status": {
       "type": "STRING"
     },
+    "isActive": {
+      "type": "BOOLEAN",
+      "defaultValue": true
+    },
     "deletedAt": {
-      "allowNull": true,
-      "type": "DATE"
+      "type": "DATE",
+      "allowNull": true
     },
     "extraInfo": {
-      "defaultValue": null,
-      "type": "JSONB"
-    },
-    "id": {
-      "autoIncrement": true,
-      "primaryKey": true,
-      "type": "INTEGER"
-    },
-    "isActive": {
-      "defaultValue": true,
-      "type": "BOOLEAN"
-    },
-    "name": {
-      "defaultValue": "",
-      "type": "STRING"
+      "type": "JSONB",
+      "defaultValue": null
     }
   },
   "associations": [
@@ -58,16 +58,16 @@
       "model": "Users"
     },
     {
-      "model": "PersonRelations",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "relationId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "relationId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "PersonRelations"
     }
   ]
 }

@@ -2,213 +2,209 @@
   "table": "Persons",
   "database": "application",
   "attributes": {
+    "id": {
+      "type": "INTEGER",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    "dob": {
+      "type": "DATE",
+      "defaultValue": ""
+    },
+    "gender": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "height": {
+      "type": "FLOAT",
+      "defaultValue": null
+    },
+    "rating": {
+      "type": "FLOAT",
+      "defaultValue": null
+    },
+    "weight": {
+      "type": "FLOAT",
+      "defaultValue": null
+    },
     "_status": {
       "type": "STRING"
     },
-    "deletedAt": {
-      "allowNull": true,
-      "type": "DATE"
-    },
-    "dob": {
-      "defaultValue": "",
-      "type": "DATE"
-    },
-    "emailVerified": {
-      "defaultValue": false,
-      "type": "BOOLEAN"
-    },
-    "extraInfo": {
-      "defaultValue": null,
-      "type": "JSONB"
-    },
-    "firstName": {
-      "defaultValue": "",
-      "type": "STRING"
-    },
-    "gender": {
-      "defaultValue": "",
-      "type": "STRING"
-    },
-    "height": {
-      "defaultValue": null,
-      "type": "FLOAT"
-    },
-    "id": {
-      "autoIncrement": true,
-      "primaryKey": true,
-      "type": "INTEGER"
+    "website": {
+      "type": "STRING",
+      "defaultValue": ""
     },
     "isActive": {
-      "defaultValue": true,
-      "type": "BOOLEAN"
-    },
-    "isVerified": {
-      "defaultValue": false,
-      "type": "BOOLEAN"
+      "type": "BOOLEAN",
+      "defaultValue": true
     },
     "lastName": {
-      "defaultValue": "",
-      "type": "STRING"
-    },
-    "medicalId": {
-      "defaultValue": "",
-      "type": "STRING"
-    },
-    "middleName": {
-      "defaultValue": "",
-      "type": "STRING"
-    },
-    "phoneVerified": {
-      "defaultValue": false,
-      "type": "BOOLEAN"
+      "type": "STRING",
+      "defaultValue": ""
     },
     "photoUrl": {
-      "defaultValue": "",
-      "type": "STRING"
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "deletedAt": {
+      "type": "DATE",
+      "allowNull": true
+    },
+    "extraInfo": {
+      "type": "JSONB",
+      "defaultValue": null
+    },
+    "firstName": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "medicalId": {
+      "type": "STRING",
+      "defaultValue": ""
     },
     "profileId": {
-      "defaultValue": "",
-      "type": "STRING"
+      "type": "STRING",
+      "defaultValue": ""
     },
-    "rating": {
-      "defaultValue": null,
-      "type": "FLOAT"
+    "isVerified": {
+      "type": "BOOLEAN",
+      "defaultValue": false
+    },
+    "middleName": {
+      "type": "STRING",
+      "defaultValue": ""
+    },
+    "emailVerified": {
+      "type": "BOOLEAN",
+      "defaultValue": false
+    },
+    "phoneVerified": {
+      "type": "BOOLEAN",
+      "defaultValue": false
     },
     "userInvitationToken": {
-      "defaultValue": "",
-      "type": "STRING"
-    },
-    "website": {
-      "defaultValue": "",
-      "type": "STRING"
-    },
-    "weight": {
-      "defaultValue": null,
-      "type": "FLOAT"
+      "type": "STRING",
+      "defaultValue": ""
     }
   },
   "associations": [
     {
-      "model": "Users",
       "data": [
         {
-          "type": "belongsTo",
           "data": {
             "as": "User",
-            "foreignKey": "userId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "userId"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
             "as": "Owner",
-            "foreignKey": "createdBy",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "createdBy"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
             "as": "Updater",
-            "foreignKey": "updatedBy",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "updatedBy"
+          },
+          "type": "belongsTo"
         },
         {
-          "type": "belongsTo",
           "data": {
             "as": "Destroyer",
-            "foreignKey": "deletedBy",
-            "sourceKey": "id"
-          }
-        },
-        {
-          "type": "belongsTo",
-          "data": {}
+            "sourceKey": "id",
+            "foreignKey": "deletedBy"
+          },
+          "type": "belongsTo"
         }
-      ]
+      ],
+      "model": "Users"
     },
     {
-      "model": "Persons",
       "data": [
         {
-          "type": "hasMany",
           "data": {
             "as": "Person",
-            "foreignKey": "personId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "personId"
+          },
+          "type": "hasMany"
         },
         {
-          "type": "hasMany",
           "data": {
             "as": "RelatedPersons",
-            "foreignKey": "relatedPersonId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "relatedPersonId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "PersonRelations"
     },
     {
-      "model": "PersonContacts",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "personId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "personId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "PersonContacts"
     },
     {
-      "model": "PersonAddresses",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "personId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "personId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "PersonAddresses"
     },
     {
-      "model": "PersonEducations",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "personId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "personId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "PersonEducations"
     },
     {
-      "model": "PersonExperiences",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "personId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "personId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "PersonExperiences"
     },
     {
-      "model": "",
       "data": [
         {
-          "type": "hasMany",
           "data": {
-            "foreignKey": "personId",
-            "sourceKey": "id"
-          }
+            "sourceKey": "id",
+            "foreignKey": "personId"
+          },
+          "type": "hasMany"
         }
-      ]
+      ],
+      "model": "PersonDocs"
     }
   ]
 }

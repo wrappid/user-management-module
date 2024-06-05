@@ -7,32 +7,32 @@
       "primaryKey": true,
       "autoIncrement": true
     },
-    "amount": {
-      "type": "STRING",
-      "defaultValue": ""
-    },
-    "paymentDate": {
-      "type": "DATE",
-      "defaultValue": ""
-    },
     "token": {
       "type": "FLOAT",
       "defaultValue": 0
+    },
+    "amount": {
+      "type": "STRING",
+      "defaultValue": ""
     },
     "status": {
       "type": "STRING",
       "defaultValue": "add"
     },
+    "_status": {
+      "type": "STRING"
+    },
     "isActive": {
       "type": "BOOLEAN",
       "defaultValue": true
     },
-    "_status": {
-      "type": "STRING"
-    },
     "deletedAt": {
       "type": "DATE",
       "allowNull": true
+    },
+    "paymentDate": {
+      "type": "DATE",
+      "defaultValue": ""
     }
   },
   "associations": [
@@ -64,9 +64,9 @@
         },
         {
           "data": {
-            "foreignKey": "userId",
             "as": "User",
-            "sourceKey": "id"
+            "sourceKey": "id",
+            "foreignKey": "userId"
           },
           "type": "belongsTo"
         }
