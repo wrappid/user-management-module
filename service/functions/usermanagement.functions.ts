@@ -82,16 +82,12 @@ async function groupUserPermissionData(data: any, userId: any) {
 const getRolePermissions = async (req: any, res: any) => {
   // let isValidJOI = await authenticateJOI(req, "rolePermissionGET", ["query"]);
   let roleId = null;
-  if (req.query.roleId) {
+  if (req.query.roleId){ 
     roleId = req.query.roleId;
   } else {
-    const p = await databaseActions.findOne("application", "Persons", {
-      where: { userId: req.user.userId },
-    });
-    if (p?.isVerified) {
       roleId = req.user.roleId;
     }
-  }
+  
   if (roleId) {
     const role = await databaseActions.findByPk("application", "Roles", roleId);
     //Get role permissions
