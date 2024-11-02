@@ -85,8 +85,8 @@ const getRolePermissions = async (req: any, res: any) => {
   if (req.query.roleId){ 
     roleId = req.query.roleId;
   } else {
-      roleId = req.user.roleId;
-    }
+    roleId = req.user.roleId;
+  }
   
   if (roleId) {
     const role = await databaseActions.findByPk("application", "Roles", roleId);
