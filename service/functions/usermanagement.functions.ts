@@ -37,8 +37,7 @@ async function groupRolePermissionData(data: any, roleId: any) {
     }
     return data;
   } catch (err: any) {
-    WrappidLogger.error(err.message);
-    WrappidLogger.error(err.stack);
+    console.error(err);
     throw err;
   }
 }
@@ -75,8 +74,7 @@ async function groupUserPermissionData(data: any, userId: any) {
     }
     return data;
   } catch (err: any) {
-    WrappidLogger.error(err.message);
-    WrappidLogger.error(err.stack);
+    console.error(err);
     throw err;
   }
 }
