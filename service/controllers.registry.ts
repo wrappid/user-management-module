@@ -5,7 +5,6 @@ import { rolePermissionGET } from "./validations/usermanagement.validation";
 // const CoreMiddleware =
 const ControllersRegistry = {
   rolePermission: [
-    CoreMiddlewaresRegistry.jwtVerify,
     CoreMiddlewaresRegistry.validation(rolePermissionGET),
     usermanagementController.rolePermission,
   ],

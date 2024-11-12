@@ -1,7 +1,8 @@
 import {
+  coreConstant,
   databaseActions,
   databaseProvider,
-  coreConstant,
+  WrappidLogger,
 } from "@wrappid/service-core";
 
 async function groupRolePermissionData(data: any, roleId: any) {
@@ -36,7 +37,8 @@ async function groupRolePermissionData(data: any, roleId: any) {
     }
     return data;
   } catch (err: any) {
-    console.log(err);
+    WrappidLogger.error(err.message);
+    WrappidLogger.error(err.stack);
     throw err;
   }
 }
@@ -73,7 +75,8 @@ async function groupUserPermissionData(data: any, userId: any) {
     }
     return data;
   } catch (err: any) {
-    console.log(err);
+    WrappidLogger.error(err.message);
+    WrappidLogger.error(err.stack);
     throw err;
   }
 }
@@ -85,7 +88,7 @@ const getRolePermissions = async (req: any, res: any) => {
   if (req.query.roleId){ 
     roleId = req.query.roleId;
   } else {
-    roleId = req.user.roleId;
+    roleId = req.user.roleID;
   }
   
   if (roleId) {

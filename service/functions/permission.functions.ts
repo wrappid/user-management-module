@@ -1,6 +1,7 @@
 import { coreConstant, databaseActions, databaseProvider } from "@wrappid/service-core";
 
 export async function createRolePermissions(req: any) {
+  const userID = req.user.userID;
   const rows = req.body.rolePermissionMap;
   const roleId = req.params.id;
   const database:string = <string>req.query?.database || "application";
@@ -15,7 +16,7 @@ export async function createRolePermissions(req: any) {
     });
     const nrows = await databaseActions.update(database,"RolePermissions", {
       _status: coreConstant.entityStatus.INACTIVE,
-      updatedBy: req.user.userId,
+      updatedBy: userID
     },
     {
       where: {
