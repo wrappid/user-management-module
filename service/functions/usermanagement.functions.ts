@@ -1,8 +1,7 @@
 import {
   coreConstant,
   databaseActions,
-  databaseProvider,
-  WrappidLogger,
+  databaseProvider
 } from "@wrappid/service-core";
 
 async function groupRolePermissionData(data: any, roleId: any) {
@@ -80,7 +79,7 @@ async function groupUserPermissionData(data: any, userId: any) {
 }
 
 // eslint-disable-next-line no-unused-vars
-const getRolePermissions = async (req: any, res: any) => {
+const getRolePermissions = async (req: any) => {
   // let isValidJOI = await authenticateJOI(req, "rolePermissionGET", ["query"]);
   let roleId = null;
   if (req.query.roleId){ 
@@ -131,7 +130,7 @@ const getRolePermissions = async (req: any, res: any) => {
             attributes: ["id", "priority"],
             required: true,
             where: {
-              userId: req.user.userId,
+              userId: req.user.userID,
               _status: coreConstant.entityStatus.ACTIVE,
             },
           },
@@ -149,7 +148,7 @@ const getRolePermissions = async (req: any, res: any) => {
     //Group child user permissions
     userPermissions = await groupUserPermissionData(
       userPermissions,
-      req.user.userId
+      req.user.userID
     );
 
     //get the priority key from rolepermission
@@ -187,7 +186,7 @@ const getRolePermissions = async (req: any, res: any) => {
   }
 };
 // eslint-disable-next-line no-unused-vars
-const getUserSearchPaginatedFunc = async (req: any, res: any) => {
+const getUserSearchPaginatedFunc = async (req: any) => {
   try {
     const name = "%" + req.query.input + "%";
     const roleOb: any = {};

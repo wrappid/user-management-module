@@ -42,8 +42,8 @@ export async function createRolePermissions(req: any) {
           roleId: req.params.id,
           permissionId: data.id,
           priority: data.priority,
-          createdBy: req.user.userId,
-          updatedBy: req.user.userId,
+          createdBy: req.user.userID,
+          updatedBy: req.user.userID,
           _status: coreConstant.entityStatus.ACTIVE,
         };
   
