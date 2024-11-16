@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://https//github.com/wrappid/wrappid-module/compare/v0.0.2...v0.0.3) (2024-11-16)
+
+
+### Bug Fixes
+
+* **core:** :zap: ums service fix ([b4a9e0c](https://https//github.com/wrappid/wrappid-module/commit/b4a9e0c693795393e1080cf4f31e54d48d7aaae6))
+
 ### 0.0.2 (2024-11-12)
 
 
