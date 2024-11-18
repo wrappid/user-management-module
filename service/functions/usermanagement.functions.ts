@@ -1,7 +1,7 @@
 import {
-  coreConstant,
-  databaseActions,
-  databaseProvider
+    coreConstant,
+    databaseActions,
+    databaseProvider
 } from "@wrappid/service-core";
 
 async function groupRolePermissionData(data: any, roleId: any) {
@@ -85,7 +85,7 @@ const getRolePermissions = async (req: any) => {
   if (req.query.roleId){ 
     roleId = req.query.roleId;
   } else {
-    roleId = req.user.roleID;
+    roleId= req?.user?.roleID;
   }
   
   if (roleId) {
@@ -321,3 +321,4 @@ async function paginate(
 }
 
 export { getRolePermissions, getUserSearchPaginatedFunc };
+
