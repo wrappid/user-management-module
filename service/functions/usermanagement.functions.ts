@@ -1,7 +1,7 @@
 import {
-    coreConstant,
-    databaseActions,
-    databaseProvider
+  coreConstant,
+  databaseActions,
+  databaseProvider
 } from "@wrappid/service-core";
 
 async function groupRolePermissionData(data: any, roleId: any) {

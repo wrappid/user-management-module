@@ -21,6 +21,7 @@ export async function createRolePermissions(req: any) {
     {
       where: {
         roleId: roleId,
+        _status: coreConstant.entityStatus.ACTIVE,
       },
     }
     );
