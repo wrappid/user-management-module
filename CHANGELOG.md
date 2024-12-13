@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://https//github.com/wrappid/wrappid-module/compare/v0.0.6...v0.0.7) (2024-12-13)
+
+
+### Bug Fixes
+
+* **core:** :ambulance: user search fix ([c3a835a](https://https//github.com/wrappid/wrappid-module/commit/c3a835a9442fe950174fada1b7c803380d092c7f))
+* **core:** :zap: user search paginated ([f9411e0](https://https//github.com/wrappid/wrappid-module/commit/f9411e073f0bea1cf5bc8cee169f3bb6483235b7))
+
 ### [0.0.6](https://https//github.com/wrappid/wrappid-module/compare/v0.0.5...v0.0.6) (2024-12-09)
 
 ### [0.0.5](https://https//github.com/wrappid/wrappid-module/compare/v0.0.4...v0.0.5) (2024-12-02)
