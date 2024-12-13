@@ -301,8 +301,8 @@ async function paginate(
   console.log("pageQuery", inculdeOb, whereOb, pageQuery);
   try {
     const data = await databaseActions.findAll("application", "Users", {
-      // benchmark: true,
-      // logging: console.log,
+      benchmark: true,
+      logging: console.log,
       include: inculdeOb,
       where: whereOb,
       offset: pageQuery?.start /* 
