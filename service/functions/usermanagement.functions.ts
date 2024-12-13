@@ -218,6 +218,10 @@ const getUserSearchPaginatedFunc = async (req: any) => {
           as: "Person",
           include: [
             {
+              model: databaseProvider.application.models.PersonMetas,
+              as: "PersonMetas"
+            },
+            {
               model: databaseProvider.application.models.PersonRelations,
               as: "Person",
               include: [
@@ -225,16 +229,27 @@ const getUserSearchPaginatedFunc = async (req: any) => {
                 {
                   model: databaseProvider.application.models.Persons,
                   as: "RelatedPerson",
+                  include: [
+                    {
+                      model: databaseProvider.application.models.PersonMetas,
+                      as: "PersonMetas"
+                    },
+                  ],
                 },
               ],
             },
           ],
         },
         {
-          model: databaseProvider.application.models.Roles,
-          where: roleOb,
-          as: "Role",
-          attributes: ["id", "role"],
+          model: databaseProvider.application.models.UserRoles,
+          as: "UserRole",
+          include: [
+            {
+              model: databaseProvider.application.models.Roles,
+              as: "Role",
+              where: roleOb,
+            },
+          ],
         },
       ],
       baseQuery,
