@@ -106,7 +106,13 @@ const getRolePermissions = async (req: any) => {
             },
           },
         ],
-        where: { parentId: null, _status: coreConstant.entityStatus.ACTIVE },
+        where: {
+          parentId: {
+            [databaseProvider.application.sequelize.Op.or]: {
+              [databaseProvider.application.sequelize.Op.is]: null,
+              [databaseProvider.application.sequelize.Op.eq]: 0
+            }
+          }, _status: coreConstant.entityStatus.ACTIVE },
         order: [
           [
             databaseProvider.application.models.RolePermissions,
