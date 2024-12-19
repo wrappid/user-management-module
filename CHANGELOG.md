@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://https//github.com/wrappid/wrappid-module/compare/v0.0.7...v0.0.8) (2024-12-19)
+
+
+### Bug Fixes
+
+* **core:** :bug: role permission related issue resolve ([955e126](https://https//github.com/wrappid/wrappid-module/commit/955e126943cf044d0b5d6d0c6b4dec83e2df23d1))
+* **core:** :zap: role permission issue ([32f0b13](https://https//github.com/wrappid/wrappid-module/commit/32f0b133aa1768e57a02cdfff06025dfbfd7db32))
+
 ### [0.0.7](https://https//github.com/wrappid/wrappid-module/compare/v0.0.6...v0.0.7) (2024-12-13)
 
 
