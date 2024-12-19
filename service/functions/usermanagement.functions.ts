@@ -3,6 +3,7 @@ import {
   databaseActions,
   databaseProvider
 } from "@wrappid/service-core";
+import sequelize from "sequelize";
 
 async function groupRolePermissionData(data: any, roleId: any) {
   try {
@@ -95,22 +96,20 @@ const getRolePermissions = async (req: any) => {
       "application",
       "Permissions",
       {
-        include: [
-          {
-            model: databaseProvider.application.models.RolePermissions,
-            attributes: ["id", "priority"],
-            required: true,
-            where: {
-              roleId: roleId,
-              _status: coreConstant.entityStatus.ACTIVE,
-            },
+        include: {
+          model: databaseProvider.application.models.RolePermissions,
+          attributes: ["id", "priority"],
+          required: true,
+          where: {
+            roleId: roleId,
+            _status: coreConstant.entityStatus.ACTIVE,
           },
-        ],
+        },
         where: {
           parentId: {
-            [databaseProvider.application.sequelize.Op.or]: {
-              [databaseProvider.application.sequelize.Op.is]: null,
-              [databaseProvider.application.sequelize.Op.eq]: 0
+            [sequelize.Op.or]: {
+              [sequelize.Op.is]: null,
+              [sequelize.Op.eq]: 0
             }
           }, _status: coreConstant.entityStatus.ACTIVE },
         order: [
@@ -199,15 +198,15 @@ const getUserSearchPaginatedFunc = async (req: any) => {
     if (req.query.role) roleOb.role = req.query.role;
     console.log("NAME", name);
     const baseQuery = {
-      [databaseProvider.application.Sequelize.Op.or]: [
+      [sequelize.Op.or]: [
         {
           email: {
-            [databaseProvider.application.Sequelize.Op.iLike]: name.toLowerCase(),
+            [sequelize.Op.iLike]: name.toLowerCase(),
           },
         },
         {
           phone: {
-            [databaseProvider.application.Sequelize.Op.iLike]: name.toLowerCase(),
+            [sequelize.Op.iLike]: name.toLowerCase(),
           },
         },
       ],
