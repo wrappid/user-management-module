@@ -1,6 +1,6 @@
 {
   "name": "user-management-module",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "This is a template repository for a wrappid module.",
   "main": "index.js",
   "scripts": {
